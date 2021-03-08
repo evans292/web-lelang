@@ -15,6 +15,21 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @can('admin')
+                    <x-nav-link :href="route('admin.admin-page')" :active="request()->routeIs('admin.*')">
+                        {{ __('Admin') }}
+                    </x-nav-link>
+                    @endcan
+                    @can('petugas')
+                    <x-nav-link :href="route('petugas.petugas-page')" :active="request()->routeIs('petugas.*')">
+                        {{ __('Petugas') }}
+                    </x-nav-link>
+                    @endcan
+                    @can('masyarakat')
+                    <x-nav-link :href="route('masyarakat.masyarakat-page')" :active="request()->routeIs('masyarakat.*')">
+                        {{ __('Masyarakat') }}
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
