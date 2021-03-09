@@ -1,8 +1,16 @@
 <x-guest-layout>
+    <x-slot name="title">
+        Masuk
+    </x-slot>   
     <x-auth-card>
-        <x-slot name="logo">
+        <x-slot name="image">
+        <img src="{{ asset('image/login.svg') }}" alt="Image">
+        </x-slot>
+        <x-slot name="title">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-application-logo class="w-20 h-20 fill-current text-red-400" />
+                <h3 class="text-3xl text-center md:text-left">Login</h3>
+                <p class="text-center md:text-left">Lelang online SMKN 1 Sumedang</p>
             </a>
         </x-slot>
 
@@ -10,16 +18,15 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" novalidate>
             @csrf
-
             <!-- Email Address -->
             <div>
                 <x-label for="email" :value="__('Email')" />
-
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-validation-message name="email"/>
             </div>
 
             <!-- Password -->
@@ -30,25 +37,24 @@
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
+                <x-validation-message name="password"/>
             </div>
 
             <!-- Remember Me -->
-            <div class="block mt-4">
+            {{-- <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
-            </div>
+            </div> --}}
 
             <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('Belum punya akun?') }}
+                </a>
 
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
+                <x-button class="ml-3 bg-red-400">
+                    {{ __('Masuk') }}
                 </x-button>
             </div>
         </form>

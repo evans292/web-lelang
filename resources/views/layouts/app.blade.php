@@ -15,6 +15,19 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <style>
+                        /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            }
+
+            /* Firefox */
+            input[type=number] {
+            -moz-appearance: textfield;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-50">
