@@ -12,9 +12,12 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('font-awesome/app.css') }}" />
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        {{ $script ?? ''}} 
+        {{ $style ?? ''}}
         <style>
                         /* Chrome, Safari, Edge, Opera */
             input::-webkit-outer-spin-button,

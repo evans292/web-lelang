@@ -14,4 +14,26 @@
             </div>
         </div>
     </div>
+
+    <x-slot name="script">
+        @if (session('admin'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() { 
+                greet('Admin')
+            }, true); 
+        </script>
+        @elseif (session('operator'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() { 
+                greet('Operator')
+            }, true); 
+        </script>
+        @elseif (session('customer'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() { 
+                greet('Customer')
+            }, true); 
+        </script>
+        @endif
+    </x-slot>
 </x-app-layout>

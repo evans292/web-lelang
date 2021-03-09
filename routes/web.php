@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Masyarakat\MasyarakatController;
-use App\Http\Controllers\Petugas\PetugasController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Petugas\PetugasController;
+use App\Http\Controllers\Masyarakat\MasyarakatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,11 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::group(['middleware' => 'auth'], function() {
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('profile');
+        Route::patch('/{userid}/{profileid}', [ProfileController::class, 'update'])->name('profile.update');
+    });
+
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::get('admin-page', [AdminController::class, 'index'])->name('admin-page');
     });
