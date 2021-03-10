@@ -38,6 +38,11 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            @if (Auth::user()->getMedia('avatar')->count() === 0)
+                            <img src="{{ asset('image/download.png') }}" class="rounded-full w-10 h-10 mr-2"> 
+                            @else
+                            <img src="{{ Auth::user()->getMedia('avatar')[0]->getUrl() }}" class="rounded-full w-10 h-10 mr-2">
+                            @endif
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
@@ -49,8 +54,8 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link href="{{ route('profile') }}">
-                            <i class="fas fa-user mr-2"></i>{{ __('Profile') }}
+                        <x-dropdown-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
+                            <i class="fas fa-user mr-2"></i>{{ __('Profil') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -59,7 +64,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                               <i class="fas fa-sign-out-alt mr-1"></i> {{ __('Log out') }}
+                               <i class="fas fa-sign-out-alt mr-1"></i> {{ __('Keluar') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -84,15 +89,34 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @can('admin')
+            <x-responsive-nav-link :href="route('admin.admin-page')" :active="request()->routeIs('admin.*')">
+                {{ __('Admin') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('petugas')
+            <x-responsive-nav-link :href="route('petugas.petugas-page')" :active="request()->routeIs('petugas.*')">
+                {{ __('Petugas') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('masyarakat')
+            <x-responsive-nav-link :href="route('masyarakat.masyarakat-page')" :active="request()->routeIs('masyarakat.*')">
+                {{ __('Masyarakat') }}
+            </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 <div class="flex-shrink-0">
+                    @if (Auth::user()->getMedia('avatar')->count() === 0)
                     <svg class="h-10 w-10 fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
+                    @else
+                    <img src="{{ Auth::user()->getMedia('avatar')[0]->getUrl() }}" class="rounded-full w-10 h-10 mr-2">
+                    @endif
                 </div>
 
                 <div class="ml-3">
@@ -102,7 +126,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link href="{{ route('profile') }}">
+                <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
                     <i class="fas fa-user mr-2"></i>{{ __('Profile') }}
                 </x-responsive-nav-link>
                 <!-- Authentication -->

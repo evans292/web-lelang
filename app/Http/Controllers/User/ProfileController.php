@@ -21,7 +21,7 @@ class ProfileController extends Controller
         } else {
             $data = People::findOrFail(Auth::user()->people[0]->id);
         }
-        $genders = ['L' => 'Male', 'P' => 'Female'];
+        $genders = ['L' => 'Laki - Laki', 'P' => 'Perempuan'];
         return view('user.profile', compact('data', 'genders'));
     }
 
@@ -68,7 +68,7 @@ class ProfileController extends Controller
             $temporaryfile = TemporaryFile::where('folder', $request->pic)->first();
             if ($temporaryfile) {
                 $user->addMedia(storage_path('app/public/profilepic/tmp/' . $request->pic . '/' . $temporaryfile->filename))
-                ->toMediaCollection('profilepic');
+                ->toMediaCollection('avatar');
                 rmdir(storage_path('app/public/profilepic/tmp/' . $request->pic));
                 $temporaryfile->delete();
             }

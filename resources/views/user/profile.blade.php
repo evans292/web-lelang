@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="title">
-        Profile - {{ $data->name }}
+        Profil - {{ $data->name }}
     </x-slot>
     <x-slot name="nav">
         @include('layouts.navigation')
     </x-slot> 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('My Profile') }}
+            {{ __('Profil Saya') }}
         </h2>
     </x-slot>
 
@@ -24,21 +24,21 @@
                         @csrf
                         @method('patch')
                         <div class="mb-4">
-                            <x-label for="name" :value="__('Name')" />
+                            <x-label for="name" :value="__('Nama*')" />
                             <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $data->name }}" required />
                             <x-validation-message name="name"/>
                         </div>
             
                         <div class="mb-4">
-                            <x-label for="birthdate" :value="__('Birthdate')" />
+                            <x-label for="birthdate" :value="__('Tanggal Lahir*')" />
                             <x-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" value="{{ $data->birthdate }}" required />
                             <x-validation-message name="birthdate"/>
                         </div>
                         
                         <div class="mb-4">
-                            <x-label for="gender" value="{{ __('Gender') }}" />
+                            <x-label for="gender" value="{{ __('Jenis Kelamin') }}" />
                             <select name="gender" id="gender" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm select2">
-                                <option value="" class="text-gray-400" selected>-- select gender --</option>
+                                <option value="" class="text-gray-400" selected>-- pilih jenis kelamin --</option>
                                 @foreach ($genders as $key => $gender)
                                     <option value="{{ $key }}" {{ ($data->gender === $key) ? 'selected' : '' }}>{{ $gender }}</option>
                                 @endforeach
@@ -47,26 +47,26 @@
                         </div>
 
                         <div class="mb-4">
-                            <x-label for="address" value="{{ __('Address') }}" />
+                            <x-label for="address" value="{{ __('Alamat') }}" />
                             <textarea name="address" id="address" cols="30" rows="10" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ $data->address }}</textarea>
                             <x-validation-message name="address"/>
                         </div>
 
                         <div class="mb-4">
-                            <x-label for="phone" :value="__('Phone')" />
+                            <x-label for="phone" :value="__('No. Handphone')" />
                             <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" value="{{ $data->phone }}" required />
                             <x-validation-message name="phone"/>
                         </div>
 
                         <div class="mb-4">
-                            <x-label for="pic" :value="__('Profile Picture')" />
+                            <x-label for="pic" :value="__('Foto Profil')" />
                             <input type="file" name="pic" id="pic" accept="image/png, image/jpeg, image/gif" class="bg-gray-100 block mt-1 w-40 mt-5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-sm shadow-sm">
                             <x-validation-message name="pic"/>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">            
                             <x-button class="ml-3">
-                                {{ __('Update') }}
+                                {{ __('Perbarui') }}
                             </x-button>
                         </div>
                     </form>
@@ -97,7 +97,7 @@
             
             const pond = FilePond.create(document.querySelector('input[id="pic"]'), 
             {
-                labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                labelIdle: `Seret foto profilmu atau <span class="filepond--label-action">Telusuri</span>`,
                 imagePreviewHeight: 170,
                 imageCropAspectRatio: '1:1',
                 imageResizeTargetWidth: 200,
