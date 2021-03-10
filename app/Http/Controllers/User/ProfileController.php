@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User;
+use App\Models\People;
+use App\Models\Operator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Operator;
-use App\Models\People;
+use App\Models\TemporaryFile;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -23,81 +25,55 @@ class ProfileController extends Controller
         return view('user.profile', compact('data', 'genders'));
     }
 
-    // public function update(UpdateProfileRequest $request, $userid, $profileid)
-    // {
-    //     $name_slug = Str::slug(request('name'));
-    //     $datetime = new DateTime();
+    public function update(Request $request, $userid, $profileid)
+    {
+        $request->validate([
+            'name' => 'required',
+            'birthdate' => 'required|date',
+            'phone' => 'max:12',
+        ]);
+   
+        $user = User::findOrFail($userid);
+        if ($user->role_id === 1 || $user->role_id === 2) {
+            Operator::where('id', $profileid)->update([
+                'name' => $request->name,
+                'birthdate' => $request->birthdate,
+                'gender' => $request->gender,
+                'address' => $request->address,
+                'phone' => $request->phone
+            ]);
 
-    //     $picture = $request->file('pic');
-    //     $pictureUrl = Auth::user()->profilepic;
-    //     if ($picture !== null) {
-    //         if ($pictureUrl !== null) {
-    //             Storage::disk('local')->delete('public/' . $pictureUrl);
-    //         }
-    //         $pictureUrl = $picture->storeAs("images/profilepic", "{$name_slug}-{$datetime->format('Y-m-d-s')}.{$picture->extension()}");
-    //     }
-    //     $user = User::findOrFail($userid);
-    //     if ($user->role_id === 1) {
-    //         Admin::where('id', $profileid)->update([
-    //             'name' => $request->name,
-    //             'birthdate' => $request->birthdate,
-    //             'gender' => $request->gender,
-    //             'address' => $request->address,
-    //             'phone' => $request->phone
-    //         ]);
+            $user->name = $request->name;
+            $user->save();
 
-    //         $user->name = $request->name;
-    //         $user->profilepic = $pictureUrl;
-    //         $user->save();
-    //     } else if ($user->role_id === 2) {
-    //         if (Auth::user()->students[0]->schoolclass_id === null) {
-    //             Student::where('id', $profileid)->update([
-    //                 'schoolclass_id' => $request->class,        
-    //                 'name' => $request->name,
-    //                 'birthdate' => $request->birthdate,
-    //                 'gender' => $request->gender,
-    //                 'address' => $request->address,
-    //                 'phone' => $request->phone
-    //             ]);
-    //         } else {
-    //             Student::where('id', $profileid)->update([      
-    //                 'name' => $request->name,
-    //                 'birthdate' => $request->birthdate,
-    //                 'gender' => $request->gender,
-    //                 'address' => $request->address,
-    //                 'phone' => $request->phone
-    //             ]);
-    //         }
+            $temporaryfile = TemporaryFile::where('folder', $request->pic)->first();
+            if ($temporaryfile) {
+                $user->addMedia(storage_path('app/public/profilepic/tmp/' . $request->pic . '/' . $temporaryfile->filename))
+                ->toMediaCollection('avatar');
+                rmdir(storage_path('app/public/profilepic/tmp/' . $request->pic));
+                $temporaryfile->delete();
+            }
+        } else {
+            People::where('id', $profileid)->update([
+                'name' => $request->name,
+                'birthdate' => $request->birthdate,
+                'gender' => $request->gender,
+                'address' => $request->address,
+                'phone' => $request->phone
+            ]);
 
-    //         $user->name = $request->name;
-    //         $user->profilepic = $pictureUrl;
-    //         $user->save();
-    //     } else if ($user->role_id === 3) {
-    //         Teacher::where('id', $profileid)->update([
-    //             'name' => $request->name,
-    //             'birthdate' => $request->birthdate,
-    //             'gender' => $request->gender,
-    //             'address' => $request->address,
-    //             'phone' => $request->phone
-    //         ]);
+            $user->name = $request->name;
+            $user->save();
 
-    //         $user->name = $request->name;
-    //         $user->profilepic = $pictureUrl;
-    //         $user->save();
-    //     } else {
-    //         Headmaster::where('id', $profileid)->update([
-    //             'name' => $request->name,
-    //             'birthdate' => $request->birthdate,
-    //             'gender' => $request->gender,
-    //             'address' => $request->address,
-    //             'phone' => $request->phone
-    //         ]);
-
-    //         $user->name = $request->name;
-    //         $user->profilepic = $pictureUrl;
-    //         $user->save();
-    //     }
+            $temporaryfile = TemporaryFile::where('folder', $request->pic)->first();
+            if ($temporaryfile) {
+                $user->addMedia(storage_path('app/public/profilepic/tmp/' . $request->pic . '/' . $temporaryfile->filename))
+                ->toMediaCollection('profilepic');
+                rmdir(storage_path('app/public/profilepic/tmp/' . $request->pic));
+                $temporaryfile->delete();
+            }
+        }
         
-    //     return redirect(route('profile'))->with('success', 'lol');
-    // }
+        return redirect(route('profile'))->with('success', 'lol');
+    }
 }

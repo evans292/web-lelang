@@ -15,11 +15,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 flex justify-between">
-                    {{-- @if (Auth::user()->profilepic === null)
+                    @if (Auth::user()->getMedia('avatar')->count() === 0)
                     <img src="{{ asset('image/download.png') }}" class="rounded-lg w-1/4 h-1/4"> 
                     @else
-                    <img src="{{ asset('storage/' . Auth::user()->profilepic) }}" class="rounded-lg w-1/4 h-1/4">
-                    @endif --}}
+                    <img src="{{ Auth::user()->getMedia('avatar')[0]->getUrl() }}" class="rounded-lg w-1/4 h-1/4">
+                    @endif
                     <form method="post" class="w-full ml-5" action="{{ route('profile.update', ['userid' => $data->user_id, 'profileid' => $data->id]) }}" novalidate enctype="multipart/form-data">
                         @csrf
                         @method('patch')
@@ -60,7 +60,7 @@
 
                         <div class="mb-4">
                             <x-label for="pic" :value="__('Profile Picture')" />
-                            <input type="file" name="pic" id="pic" class="bg-gray-100 block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-sm shadow-sm">
+                            <input type="file" name="pic" id="pic" accept="image/png, image/jpeg, image/gif" class="bg-gray-100 block mt-1 w-40 mt-5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-sm shadow-sm">
                             <x-validation-message name="pic"/>
                         </div>
 
@@ -83,5 +83,40 @@
             }, true); 
         </script>
         @endif
+
+        <script>
+            FilePond.registerPlugin(
+                FilePondPluginFileValidateType,
+                FilePondPluginImageExifOrientation,
+                FilePondPluginImagePreview,
+                FilePondPluginImageCrop,
+                FilePondPluginImageResize,
+                FilePondPluginImageTransform,
+                FilePondPluginImageEdit
+            );
+            
+            const pond = FilePond.create(document.querySelector('input[id="pic"]'), 
+            {
+                labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                imagePreviewHeight: 170,
+                imageCropAspectRatio: '1:1',
+                imageResizeTargetWidth: 200,
+                imageResizeTargetHeight: 200,
+                stylePanelLayout: 'compact circle',
+                styleLoadIndicatorPosition: 'center bottom',
+                styleProgressIndicatorPosition: 'right bottom',
+                styleButtonRemoveItemPosition: 'left bottom',
+                styleButtonProcessItemPosition: 'right bottom',
+            });
+
+            FilePond.setOptions({
+                server: {
+                    url: '/upload',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }
+            });
+        </script>
     </x-slot>
 </x-app-layout>

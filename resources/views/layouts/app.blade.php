@@ -13,10 +13,15 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('font-awesome/app.css') }}" />
-
-        <!-- Scripts -->
+        <!-- add to document <head> -->
+            <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+            <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+            <link
+                href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css"
+                rel="stylesheet"
+                />
+            <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        {{ $script ?? ''}} 
         {{ $style ?? ''}}
         <style>
                         /* Chrome, Safari, Edge, Opera */
@@ -48,5 +53,16 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- add before </body> -->
+        <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    {{ $script ?? ''}} 
     </body>
 </html>
