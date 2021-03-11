@@ -18,4 +18,4 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 ]).sass('resources/sass/app.scss', 'public/font-awesome').copy(
     'node_modules/@fortawesome/fontawesome-free/webfonts',
     'public/webfonts'
-);
+).postCss('resources/css/select2.css', 'public/css')

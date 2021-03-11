@@ -19,7 +19,7 @@
             >
               <a
                 class="text-gray-600 block"
-                href="#pablo"
+                href="#"
                 onclick="openDropdown(event,'user-dropdown')"
               >
                 <div class="items-center flex">

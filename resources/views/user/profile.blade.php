@@ -75,6 +75,8 @@
         </div>
     </div>
 
+
+
     <x-slot name="script">
         @if (session('success'))
         <script>
@@ -83,40 +85,5 @@
             }, true); 
         </script>
         @endif
-
-        <script>
-            FilePond.registerPlugin(
-                FilePondPluginFileValidateType,
-                FilePondPluginImageExifOrientation,
-                FilePondPluginImagePreview,
-                FilePondPluginImageCrop,
-                FilePondPluginImageResize,
-                FilePondPluginImageTransform,
-                FilePondPluginImageEdit
-            );
-            
-            const pond = FilePond.create(document.querySelector('input[id="pic"]'), 
-            {
-                labelIdle: `Seret foto profilmu atau <span class="filepond--label-action">Telusuri</span>`,
-                imagePreviewHeight: 170,
-                imageCropAspectRatio: '1:1',
-                imageResizeTargetWidth: 200,
-                imageResizeTargetHeight: 200,
-                stylePanelLayout: 'compact circle',
-                styleLoadIndicatorPosition: 'center bottom',
-                styleProgressIndicatorPosition: 'right bottom',
-                styleButtonRemoveItemPosition: 'left bottom',
-                styleButtonProcessItemPosition: 'right bottom',
-            });
-
-            FilePond.setOptions({
-                server: {
-                    url: '/upload',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                }
-            });
-        </script>
     </x-slot>
 </x-app-layout>

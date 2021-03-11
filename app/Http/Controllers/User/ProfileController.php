@@ -50,6 +50,7 @@ class ProfileController extends Controller
             if ($temporaryfile) {
                 $user->addMedia(storage_path('app/public/profilepic/tmp/' . $request->pic . '/' . $temporaryfile->filename))
                 ->toMediaCollection('avatar');
+                
                 rmdir(storage_path('app/public/profilepic/tmp/' . $request->pic));
                 $temporaryfile->delete();
             }

@@ -22,9 +22,22 @@
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.8",
         "sass-loader": "^10.1.1",
-        "tailwindcss": "^2.0.2"
+        "tailwindcss": "^2.0.2",
+        "webpack-cli": "^4.5.0"
     },
     "dependencies": {
+        "@popperjs/core": "^2.9.1",
+        "filepond": "^4.25.2",
+        "filepond-plugin-file-validate-size": "^2.2.2",
+        "filepond-plugin-file-validate-type": "^1.2.5",
+        "filepond-plugin-image-crop": "^2.0.4",
+        "filepond-plugin-image-edit": "^1.6.2",
+        "filepond-plugin-image-exif-orientation": "^1.0.9",
+        "filepond-plugin-image-preview": "^4.6.5",
+        "filepond-plugin-image-resize": "^2.0.7",
+        "filepond-plugin-image-transform": "^3.7.5",
+        "jquery": "^3.6.0",
+        "select2": "^4.1.0-rc.0",
         "sweetalert2": "^10.15.5",
         "vue": "^2.6.12",
         "vue-toast-notification": "^0.6.1"
