@@ -38,24 +38,14 @@ FilePond.registerPlugin(
     FilePondPluginImageEdit
 );
 
-const pond = FilePond.create(document.querySelector('input[id="pic"]'), 
-{
-    labelIdle: `Seret foto profilmu atau <span class="filepond--label-action">Telusuri</span>`,
-    imagePreviewHeight: 170,
-    imageCropAspectRatio: '1:1',
-    imageResizeTargetWidth: 200,
-    imageResizeTargetHeight: 200,
-    stylePanelLayout: 'compact circle',
-    styleLoadIndicatorPosition: 'center bottom',
-    styleProgressIndicatorPosition: 'right bottom',
-    styleButtonRemoveItemPosition: 'left bottom',
-    styleButtonProcessItemPosition: 'right bottom',
+const ponds = FilePond.create(document.querySelector('input[id="pics"]'), {
+    labelIdle: `Seret foto barang atau <span class="filepond--label-action">Telusuri</span>`,
+    allowMultiple: true,
 });
-
 
 FilePond.setOptions({
     server: {
-        url: '/upload',
+        url: '/upload-multiple',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         }

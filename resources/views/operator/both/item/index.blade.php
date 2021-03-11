@@ -1,6 +1,6 @@
 <x-operator-layout>
     <x-slot name="title">
-      {{ __('Data Masyarakat') }}
+      {{ __('Data Barang') }}
     </x-slot>  
   
     
@@ -13,6 +13,7 @@
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="text-right  mb-3">
+                    <a href="{{ route('operator.item.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"><i class="fas fa-plus mr-2"></i>Barang</a>
                     </div>
                     <div class="shadow overflow-hidden sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
@@ -25,13 +26,10 @@
                             Nama
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            TL & Alamat
+                            Tanggal
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            No. Handphone
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Terdaftar Sejak
+                            Harga Awal
                             </th>
                             <th scope="col" class="relative px-6 py-3">
                                 <span class="sr-only">Edit</span>
@@ -47,41 +45,34 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-10 w-10">
-                                @if ($data->user->getMedia('avatar')->count() === 0)
+                                {{-- @if ($data->user->getMedia('avatar')->count() === 0) --}}
                                 <img class="h-10 w-10 rounded-full" src="{{ asset('image/download.png') }}" alt="">
-                                @else
-                                <img class="h-10 w-10 rounded-full" src="{{ $data->user->getMedia('avatar')[0]->getUrl() }}" alt="">   
-                                @endif
+                                {{-- @else --}}
+                                {{-- <img class="h-10 w-10 rounded-full" src="{{ $data->user->getMedia('avatar')[0]->getUrl() }}" alt="">   
+                                @endif --}}
                                 </div>
                                 <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">
                                     {{ $data->name }}
                                 </div>
-                                <div class="text-sm text-gray-500">
-                                    {{ $data->user->email }}
-                                </div>
                                 </div>
                             </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">{{ $data->birthdate }}</div>
-                            <div class="text-sm text-gray-500">{{ Str::limit($data->address, 20) }}</div>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                {{ $data->date->format('Y-m-d') }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                {{ $data->phone }}
+                                @currency($data->starting_price)
                             </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {{ $data->user->created_at->diffForHumans() }}
-                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <form id="{{ $data->id }}" action="{{ route('operator.people.destroy', ['user' => $data->user_id]) }}" method="POST">
+                                <form id="{{ $data->id }}" action="{{ route('operator.item.destroy', ['item' => $data->id]) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                   </form>
                                   <a href="#" onclick="deleteConfirm('{{ $data->name }}', '{{ $data->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
-                                  <a href="{{ route('operator.people.show', ['people' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
+                                  <a href="{{ route('operator.item.show', ['item' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
                               </td>
                         </tr>
                         @endforeach            
@@ -92,7 +83,7 @@
                 </div>
                 </div>
             </div>
-            {{ $datas->links() }}
+            {{-- {{ $datas->links() }} --}}
               </div>
           </div>
       </div>
@@ -102,7 +93,7 @@
         @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() { 
-                success('User dihapus!')
+                success('Barang dihapus!')
             }, true); 
         </script>
         @endif

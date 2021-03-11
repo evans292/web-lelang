@@ -48,10 +48,10 @@ class ProfileController extends Controller
 
             $temporaryfile = TemporaryFile::where('folder', $request->pic)->first();
             if ($temporaryfile) {
-                $user->addMedia(storage_path('app/public/profilepic/tmp/' . $request->pic . '/' . $temporaryfile->filename))
+                $user->addMedia(storage_path('app/public/image/tmp/' . $request->pic . '/' . $temporaryfile->filename))
                 ->toMediaCollection('avatar');
                 
-                rmdir(storage_path('app/public/profilepic/tmp/' . $request->pic));
+                rmdir(storage_path('app/public/image/tmp/' . $request->pic));
                 $temporaryfile->delete();
             }
         } else {

@@ -31,6 +31,7 @@ require __DIR__.'/auth.php';
 
 Route::group(['middleware' => 'auth'], function() {
     Route::post('upload', [UploadController::class, 'store']);
+    Route::post('upload-multiple', [UploadController::class, 'storeMultiple']);
 
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('profile');
@@ -57,6 +58,14 @@ Route::group(['middleware' => 'auth'], function() {
         });
 
         Route::get('item', [OperatorController::class, 'showItem'])->name('item');
+        Route::group(['prefix' => 'item', 'as' => 'item.'], function() {
+            Route::get('/create', [OperatorController::class, 'registerItem'])->name('create');
+            Route::post('/', [OperatorController::class, 'storeItem'])->name('store');
+            Route::get('/{item}/edit', [OperatorController::class, 'editItem'])->name('edit');
+            Route::get('/{item}', [OperatorController::class, 'showItem'])->name('show');
+            Route::patch('/{item}', [OperatorController::class, 'updateItem'])->name('update');
+            Route::delete('/{item}', [OperatorController::class, 'destroyItem'])->name('destroy');
+       });
       });
 
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {

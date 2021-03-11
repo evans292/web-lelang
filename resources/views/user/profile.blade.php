@@ -16,9 +16,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 flex justify-between">
                     @if (Auth::user()->getMedia('avatar')->count() === 0)
-                    <img src="{{ asset('image/download.png') }}" class="rounded-lg w-1/4 h-1/4"> 
+                    <img src="{{ asset('image/download.png') }}" class="rounded-full w-1/4 h-1/4"> 
                     @else
-                    <img src="{{ Auth::user()->getMedia('avatar')[0]->getUrl() }}" class="rounded-lg w-1/4 h-1/4">
+                    <img src="{{ Auth::user()->getMedia('avatar')[0]->getUrl() }}" class="rounded-full w-1/4 h-1/4">
                     @endif
                     <form method="post" class="w-full ml-5" action="{{ route('profile.update', ['userid' => $data->user_id, 'profileid' => $data->id]) }}" novalidate enctype="multipart/form-data">
                         @csrf
@@ -60,7 +60,9 @@
 
                         <div class="mb-4">
                             <x-label for="pic" :value="__('Foto Profil')" />
-                            <input type="file" name="pic" id="pic" accept="image/png, image/jpeg, image/gif" class="bg-gray-100 block mt-1 w-40 mt-5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-sm shadow-sm">
+                            <input type="file" name="pic" id="pic" accept="image/png, image/jpeg, image/gif" 
+                            data-max-file-size="3MB"
+                            class="bg-gray-100 block mt-1 w-40 mt-5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-sm shadow-sm">
                             <x-validation-message name="pic"/>
                         </div>
 

@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Operator;
 
+use App\Models\Item;
 use App\Models\User;
+use App\Models\People;
 use App\Models\Operator;
 use Illuminate\Http\Request;
+use App\Models\TemporaryFile;
 use App\Http\Controllers\Controller;
-use App\Models\People;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\DiskDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 
 class OperatorController extends Controller
 {
@@ -136,6 +142,60 @@ class OperatorController extends Controller
             abort(403);
         }
 
-        return view('operator.index');
+        $datas = Item::paginate(10);
+
+        return view('operator.both.item.index', compact('datas'));
+    }
+
+    public function registerItem()
+    {
+        if (Gate::allows('masyarakat')) {
+            abort(403);
+        }
+
+        return view('operator.both.item.create');
+    }
+
+    public function storeItem(Request $request)
+    {
+        if (Gate::allows('masyarakat')) {
+            abort(403);
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'date' => 'required|date',
+            'price' => 'required',
+            'desc' => 'required|string'
+        ]);
+
+        $item = Item::create([
+            'name' => $request->name,
+            'date' => $request->date,
+            'starting_price' => $request->price,
+            'desc' => $request->desc,
+            'operator_id' => Auth::user()->operators[0]->id
+        ]);
+
+        
+            $images = $request->pics;
+
+            foreach($images as $key => $image) {
+                $temporaryfile = TemporaryFile::where('folder', $image)->first();
+                if ($temporaryfile) {
+                    
+                    try {
+                        $item->addMedia(storage_path('app/public/image/tmp/' . $image . '/' . $temporaryfile->filename))->toMediaCollection('item');
+                    } catch (DiskDoesNotExist $e) {
+                    } catch (FileDoesNotExist $e) {
+                    } catch (FileIsTooBig $e) {
+                    }
+
+                    rmdir(storage_path('app/public/image/tmp/' . $image));
+                    $temporaryfile->delete();
+                }
+            }
+
+         return redirect()->back()->with('success', 'lol');
     }
 }

@@ -14,7 +14,7 @@ class UploadController extends Controller
             $file = $request->file('pic');
             $filename = $file->getClientOriginalName();
             $folder = uniqid() . '-' . now()->timestamp;
-            $file->storeAs('profilepic/tmp/' . $folder, $filename);
+            $file->storeAs('image/tmp/' . $folder, $filename);
 
             TemporaryFile::create([
                 'folder' => $folder,
@@ -22,6 +22,28 @@ class UploadController extends Controller
             ]);
 
             return $folder;
+        }
+
+        return '';
+    }
+
+    public function storeMultiple(Request $request) 
+    {
+        if ($request->hasFile('pics')) {
+            $files = $request->pics;
+
+            foreach ($files as $file) {
+                $filename = $file->getClientOriginalName();
+                $folder = uniqid() . '-' . now()->timestamp;
+                $file->storeAs('image/tmp/' . $folder, $filename);
+    
+                TemporaryFile::create([
+                    'folder' => $folder,
+                    'filename' => $filename
+                ]);
+    
+                return $folder;
+            }
         }
 
         return '';

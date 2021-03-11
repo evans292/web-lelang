@@ -139,7 +139,7 @@
               <li class="items-center">
                 <x-side-link :href="route('operator.item')" :active="request()->routeIs('operator.item')">
                   <i class="fas fa-cubes mr-2 text-sm {{ (request()->routeIs('operator.item')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
-                  {{ __('Barang') }}
+                  {{ __('Data Barang') }}
                 </x-side-link>
               </li>
               </li>
