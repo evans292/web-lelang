@@ -116,8 +116,8 @@
               </li>
 
               <li class="items-center">
-                <x-side-link :href="route('operator.item')" :active="request()->routeIs('operator.item')">
-                  <i class="fas fa-users mr-2 text-sm {{ (request()->routeIs('operator.item')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+                <x-side-link :href="route('operator.people')" :active="request()->routeIs('operator.people')">
+                  <i class="fas fa-users mr-2 text-sm {{ (request()->routeIs('operator.people')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
                   {{ __('Data Masyarakat') }}
                 </x-side-link>
               </li>

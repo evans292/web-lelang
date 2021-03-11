@@ -40,15 +40,22 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'operator', 'as' => 'operator.'], function() {
         Route::get('dashboard', [OperatorController::class, 'index'])->name('dashboard');
 
-        Route::get('operator-list', [OperatorController::class, 'showOperator'])->name('operator-list');
+        Route::get('operator-list', [OperatorController::class, 'showOperators'])->name('operator-list');
         Route::group(['prefix' => 'operator-list', 'as' => 'operator-list.'], function() {
             Route::get('/create', [OperatorController::class, 'registerOperator'])->name('create');
             Route::post('/', [OperatorController::class, 'storeOperator'])->name('store');
             Route::get('/{user}/edit', [OperatorController::class, 'editOperator'])->name('edit');
+            Route::get('/{operator}', [OperatorController::class, 'showOperator'])->name('show');
             Route::patch('/{user}', [OperatorController::class, 'updateOperator'])->name('update');
-            Route::delete('/{user}', [OperatorController::class, 'destroyOperator'])->name('destroy');
+            Route::delete('/{user}', [OperatorController::class, 'destroy'])->name('destroy');
         });
         
+        Route::get('people', [OperatorController::class, 'showPeoples'])->name('people');
+        Route::group(['prefix' => 'people', 'as' => 'people.'], function() {
+             Route::get('/{people}', [OperatorController::class, 'showPeople'])->name('show');
+             Route::delete('/{user}', [OperatorController::class, 'destroy'])->name('destroy');
+        });
+
         Route::get('item', [OperatorController::class, 'showItem'])->name('item');
       });
 

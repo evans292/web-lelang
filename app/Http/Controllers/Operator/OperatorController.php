@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Operator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\People;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,7 +22,7 @@ class OperatorController extends Controller
         return view('operator.index');
     }
 
-    public function showOperator()
+    public function showOperators()
     {
         if (Gate::allows('masyarakat') || Gate::allows('petugas')) {
             abort(403);
@@ -30,6 +31,15 @@ class OperatorController extends Controller
         $datas = Operator::paginate(10);
 
         return view('operator.admin.operator.index', compact('datas'));
+    }
+
+    public function showOperator(Operator $operator)
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('petugas')) {
+            abort(403);
+        }
+
+        return view('operator.admin.operator.show', compact('operator'));
     }
 
     public function registerOperator()
@@ -90,7 +100,7 @@ class OperatorController extends Controller
         return redirect()->back()->with('success', 'lol');
     }
 
-    public function destroyOperator(User $user)
+    public function destroy(User $user)
     {
         if (Gate::allows('masyarakat') || Gate::allows('petugas')) {
             abort(403);
@@ -99,6 +109,25 @@ class OperatorController extends Controller
         $user->delete();
 
         return redirect()->back()->with('success', 'lol');
+    }
+
+    public function showPeoples()
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('petugas')) {
+            abort(403);
+        }
+
+        $datas = People::paginate(10);
+        return view('operator.admin.people.index', compact('datas'));
+    }
+
+    public function showPeople(People $people)
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('petugas')) {
+            abort(403);
+        }
+
+        return view('operator.admin.people.show', compact('people'));
     }
 
     public function showItem()

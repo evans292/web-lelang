@@ -67,8 +67,10 @@
         <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
         <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
         <script>
-            $(document).ready(function() {
-                $('.select2').select2();
+           $(document).ready(function() {
+                $('.select2').select2({
+                placeholder: 'Pilih sebuah opsi'
+                });
             });
         </script>
     {{ $script ?? ''}} 
