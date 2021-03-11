@@ -12,9 +12,10 @@ window.deleteConfirm = function(title, formId)
 {
     Swal.fire({
         icon: 'warning',
-        text: `Do you want to delete this (${title}) ?`,
+        text: `Hapus data ini (${title}) ?`,
         showCancelButton: true,
-        confirmButtonText: 'Delete',
+        confirmButtonText: 'Hapus',
+        cancelButtonText: 'Batal',
         confirmButtonColor: '#e3342f',
     }).then((result) => {
         if (result.isConfirmed) {

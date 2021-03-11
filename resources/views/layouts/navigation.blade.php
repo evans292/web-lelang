@@ -54,6 +54,11 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        @canany(['admin', 'petugas'])
+                        <x-dropdown-link href="{{ route('operator.dashboard') }}" :active="request()->routeIs('operator.*')">
+                            <i class="fas fa-tachometer-alt mr-1"></i>{{ __('Dashboard') }}
+                        </x-dropdown-link>
+                        @endcanany
                         <x-dropdown-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
                             <i class="fas fa-user mr-2"></i>{{ __('Profil') }}
                         </x-dropdown-link>
@@ -126,6 +131,11 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                @canany(['admin', 'petugas'])
+                <x-responsive-nav-link :href="route('operator.dashboard')" :active="request()->routeIs('operator.*')">
+                    <i class="fas fa-tachometer-alt mr-2"></i>{{ __('Dashboard') }}
+                </x-responsive-nav-link>
+                @endcan
                 <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
                     <i class="fas fa-user mr-2"></i>{{ __('Profile') }}
                 </x-responsive-nav-link>

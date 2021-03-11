@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Petugas\PetugasController;
 use App\Http\Controllers\Masyarakat\MasyarakatController;
+use App\Http\Controllers\Operator\OperatorController;
 use App\Http\Controllers\UploadController;
 
 /*
@@ -35,6 +36,21 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/', [ProfileController::class, 'edit'])->name('profile');
         Route::patch('/{userid}/{profileid}', [ProfileController::class, 'update'])->name('profile.update');
     });
+
+    Route::group(['prefix' => 'operator', 'as' => 'operator.'], function() {
+        Route::get('dashboard', [OperatorController::class, 'index'])->name('dashboard');
+
+        Route::get('operator-list', [OperatorController::class, 'showOperator'])->name('operator-list');
+        Route::group(['prefix' => 'operator-list', 'as' => 'operator-list.'], function() {
+            Route::get('/create', [OperatorController::class, 'registerOperator'])->name('create');
+            Route::post('/', [OperatorController::class, 'storeOperator'])->name('store');
+            Route::get('/{user}/edit', [OperatorController::class, 'editOperator'])->name('edit');
+            Route::patch('/{user}', [OperatorController::class, 'updateOperator'])->name('update');
+            Route::delete('/{user}', [OperatorController::class, 'destroyOperator'])->name('destroy');
+        });
+        
+        Route::get('item', [OperatorController::class, 'showItem'])->name('item');
+      });
 
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::get('admin-page', [AdminController::class, 'index'])->name('admin-page');

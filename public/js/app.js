@@ -3819,9 +3819,10 @@ vue__WEBPACK_IMPORTED_MODULE_3__.default.use((vue_toast_notification__WEBPACK_IM
 window.deleteConfirm = function (title, formId) {
   sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
     icon: 'warning',
-    text: "Do you want to delete this (".concat(title, ") ?"),
+    text: "Hapus data ini (".concat(title, ") ?"),
     showCancelButton: true,
-    confirmButtonText: 'Delete',
+    confirmButtonText: 'Hapus',
+    cancelButtonText: 'Batal',
     confirmButtonColor: '#e3342f'
   }).then(function (result) {
     if (result.isConfirmed) {
