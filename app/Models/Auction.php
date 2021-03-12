@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Auction extends Model
 {
     use HasFactory;
+    protected $dates = ['auction_date'];
+    protected $fillable = ['item_id', 'bid_id', 'auction_date', 'final_price', 'operator_id', 'status'];
 
     public function item()
     {
@@ -16,7 +18,7 @@ class Auction extends Model
 
     public function bid()
     {
-        return $this->hasOne(Bid::class);
+        return $this->belongsTo(Bid::class);
     }
 
     public function operator()

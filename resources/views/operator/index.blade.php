@@ -77,7 +77,7 @@
                           Jumlah Lelang
                         </h5>
                         <span class="font-semibold text-xl text-gray-800">
-                          {{ $count_it }}
+                          {{ $count_au }}
                         </span>
                       </div>
                       <div class="relative w-auto pl-4 flex-initial">
@@ -105,7 +105,7 @@
                           Jumlah Penawar
                         </h5>
                         <span class="font-semibold text-xl text-gray-800">
-                          {{ $count_it }}
+                          {{ $count_bi }}
                         </span>
                       </div>
                       <div class="relative w-auto pl-4 flex-initial">
@@ -125,6 +125,7 @@
         </div>
       </div>
   
+      
     <x-slot name="script">
       @if (session('admin'))
           <script>

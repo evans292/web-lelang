@@ -9,6 +9,8 @@ use App\Models\Operator;
 use Illuminate\Http\Request;
 use App\Models\TemporaryFile;
 use App\Http\Controllers\Controller;
+use App\Models\Auction;
+use App\Models\Bid;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -27,8 +29,10 @@ class OperatorController extends Controller
 
         $count_op = Operator::all()->count();
         $count_it = Item::all()->count();
+        $count_au = Auction::all()->count();
+        $count_bi = Bid::all()->count();
 
-        return view('operator.index', compact('count_op', 'count_it'));
+        return view('operator.index', compact('count_op', 'count_it', 'count_au', 'count_bi'));
     }
 
     public function showOperators()
@@ -280,5 +284,98 @@ class OperatorController extends Controller
             }
 
          return redirect()->back()->with('success', 'lol');
+    }
+
+    public function showAuctions()
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+            abort(403);
+        }
+
+        $datas = Auction::paginate(10);
+
+        return view('operator.petugas.auction.index', compact('datas'));
+    }
+
+    public function registerAuction() 
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+            abort(403);
+        }
+
+        $datas = Item::all();
+
+        return view('operator.petugas.auction.create', compact('datas'));
+    }
+
+    public function storeAuction(Request $request)
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+            abort(403);
+        }
+
+        $request->validate([
+            'item_id' => 'required|unique:auctions',
+            'date' => 'required|date'
+        ]);
+
+        Auction::create([
+            'item_id' => $request->item_id,
+            'auction_date' => $request->date,
+            'operator_id' => Auth::user()->operators[0]->id
+        ]);
+
+        return redirect()->back()->with('success', 'lol');
+    }
+
+    public function editAuction(Auction $auction) 
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+            abort(403);
+        }
+
+        $datas = Item::all();
+
+        return view('operator.petugas.auction.edit', compact('datas', 'auction'));
+    }
+
+    public function updateAuction(Request $request, Auction $auction)
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+            abort(403);
+        }
+
+        $request->validate([
+            'item_id' => 'required|unique:auctions,item_id,' . $auction->id,
+            'date' => 'required|date'
+        ]);
+
+        $auction->update([
+            'item_id' => $request->item_id,
+            'auction_date' => $request->date,
+            'operator_id' => Auth::user()->operators[0]->id
+        ]);
+
+        return redirect()->back()->with('success', 'lol');
+    }
+
+    public function showAuction(Auction $auction)
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+            abort(403);
+        }
+
+        
+    }
+
+    public function destroyAuction(Auction $auction)
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+            abort(403);
+        }
+
+        $auction->delete();
+
+        return redirect()->back()->with('success', 'lol');
     }
 }

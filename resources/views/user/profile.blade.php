@@ -45,7 +45,7 @@
                             </select>
                             <x-validation-message name="gender"/>
                         </div>
-
+                        
                         <div class="mb-4">
                             <x-label for="address" value="{{ __('Alamat') }}" />
                             <textarea name="address" id="address" cols="30" rows="10" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ $data->address }}</textarea>
@@ -83,7 +83,7 @@
         @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() { 
-                success('Profile updated!')
+                success('Profile diperbarui!')
             }, true); 
         </script>
         @endif

@@ -66,6 +66,19 @@ Route::group(['middleware' => 'auth'], function() {
             Route::patch('/{item}', [OperatorController::class, 'updateItem'])->name('update');
             Route::delete('/{item}', [OperatorController::class, 'destroyItem'])->name('destroy');
        });
+
+      Route::get('auction', [OperatorController::class, 'showAuctions'])->name('auction');
+      Route::get('bid-list', [OperatorController::class, 'showBids'])->name('bid');
+        Route::group(['prefix' => 'auction', 'as' => 'auction.'], function() {
+            Route::get('/create', [OperatorController::class, 'registerAuction'])->name('create');
+            Route::post('/', [OperatorController::class, 'storeAuction'])->name('store');
+            Route::get('/{auction}/edit', [OperatorController::class, 'editAuction'])->name('edit');
+            Route::get('/{auction}', [OperatorController::class, 'showAuction'])->name('show');
+            Route::patch('/{auction}', [OperatorController::class, 'updateAuction'])->name('update');
+            Route::delete('/{auction}', [OperatorController::class, 'destroyAuction'])->name('destroy');
+       });
+
+
       });
 
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {

@@ -146,6 +146,36 @@
               </li>
             </ul>
 
+          @can('petugas')
+             <!-- Divider -->
+             <hr class="my-4 md:min-w-full" />
+             <!-- Heading -->
+             <h6
+               class="md:min-w-full text-gray-600 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+             >
+               Data Lelang
+             </h6>
+             <!-- Navigation -->
+ 
+           <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+             <li class="items-center">
+               <x-side-link :href="route('operator.auction')" :active="request()->routeIs('operator.auction')">
+                 <i class="fas fa-gavel mr-2 text-sm {{ (request()->routeIs('operator.auction')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+                 {{ __('Data Lelang') }}
+               </x-side-link>
+             </li>
+             </li>
+
+             <li class="items-center">
+               <x-side-link :href="route('operator.bid')" :active="request()->routeIs('operator.bid')">
+                 <i class="fas fa-users mr-2 text-sm {{ (request()->routeIs('operator.bid')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+                 {{ __('Daftar Penawaran') }}
+               </x-side-link>
+             </li>
+             </li>
+           </ul>
+          @endcan
+
              <!-- Divider -->
              <hr class="my-4 md:min-w-full" />
              <!-- Heading -->
