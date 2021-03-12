@@ -23,4 +23,14 @@ class Item extends Model implements HasMedia
     {
         return $this->belongsTo(Operator::class);
     }
+
+    public function auction()
+    {
+        return $this->hasOne(Auction::class);
+    }
+
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
 }
