@@ -20,9 +20,7 @@
       margin: 0;
       }
   </style>
-  <script src="{{asset('js/pond.js')}}" defer></script>
-     <!-- Init the plugin -->
-     {{ $script ?? ''}} 
+
     <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
   </head>
   <body class="text-gray-800 antialiased">
@@ -42,6 +40,8 @@
 
     </div>
 
-    
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{asset('js/pond.js')}}" defer></script>
+    {{ $script ?? ''}} 
   </body>
 </html>

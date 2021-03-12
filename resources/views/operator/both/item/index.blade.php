@@ -23,13 +23,16 @@
                                 #
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Nama
+                                Nama
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Tanggal
+                                Tanggal
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Harga Awal
+                                Harga Awal
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                               Foto 
                             </th>
                             <th scope="col" class="relative px-6 py-3">
                                 <span class="sr-only">Edit</span>
@@ -42,21 +45,8 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ $loop->iteration }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10">
-                                {{-- @if ($data->user->getMedia('avatar')->count() === 0) --}}
-                                <img class="h-10 w-10 rounded-full" src="{{ asset('image/download.png') }}" alt="">
-                                {{-- @else --}}
-                                {{-- <img class="h-10 w-10 rounded-full" src="{{ $data->user->getMedia('avatar')[0]->getUrl() }}" alt="">   
-                                @endif --}}
-                                </div>
-                                <div class="ml-4">
-                                <div class="text-sm font-medium text-gray-900">
-                                    {{ $data->name }}
-                                </div>
-                                </div>
-                            </div>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                {{ $data->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 {{ $data->date->format('Y-m-d') }}
@@ -66,12 +56,20 @@
                                 @currency($data->starting_price)
                             </span>
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                <div class="flex -space-x-2 overflow-hidden">
+                                    @foreach ($data->getMedia('item') as $item)
+                                    <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="{{ $item->getUrl() }}" alt="">
+                                    @endforeach
+                                  </div>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <form id="{{ $data->id }}" action="{{ route('operator.item.destroy', ['item' => $data->id]) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                   </form>
                                   <a href="#" onclick="deleteConfirm('{{ $data->name }}', '{{ $data->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
+                                  <a href="{{ route('operator.item.edit', ['item' => $data->id]) }}"><i class="fas fa-pencil-alt text-yellow-400"></i></a>
                                   <a href="{{ route('operator.item.show', ['item' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
                               </td>
                         </tr>
@@ -83,7 +81,7 @@
                 </div>
                 </div>
             </div>
-            {{-- {{ $datas->links() }} --}}
+            {{ $datas->links() }}
               </div>
           </div>
       </div>

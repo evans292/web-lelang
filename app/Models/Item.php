@@ -19,4 +19,8 @@ class Item extends Model implements HasMedia
         'operator_id'
     ];
 
+    public function operator()
+    {
+        return $this->belongsTo(Operator::class);
+    }
 }

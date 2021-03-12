@@ -1,6 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/pond.js": "/js/pond.js",
+    "/js/gallery.js": "/js/gallery.js",
+    "/css/scroll.css": "/css/scroll.css",
+    "/css/gallery.css": "/css/gallery.css",
     "/css/select2.css": "/css/select2.css",
     "/css/app.css": "/css/app.css",
     "/font-awesome/app.css": "/font-awesome/app.css",

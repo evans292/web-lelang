@@ -136,7 +136,7 @@ class OperatorController extends Controller
         return view('operator.admin.people.show', compact('people'));
     }
 
-    public function showItem()
+    public function showItems()
     {
         if (Gate::allows('masyarakat')) {
             abort(403);
@@ -193,6 +193,86 @@ class OperatorController extends Controller
 
                     rmdir(storage_path('app/public/image/tmp/' . $image));
                     $temporaryfile->delete();
+                }
+            }
+
+         return redirect()->back()->with('success', 'lol');
+    }
+
+    public function showItem(Item $item)
+    {
+        if (Gate::allows('masyarakat')) {
+            abort(403);
+        }
+
+        return view('operator.both.item.show', compact('item'));
+    }
+
+    public function editItem(Item $item)
+    {
+        if (Gate::allows('masyarakat')) {
+            abort(403);
+        }
+
+        return view('operator.both.item.edit', compact('item'));
+    }
+
+    public function destroyItem(Item $item)
+    {
+        if (Gate::allows('masyarakat')) {
+            abort(403);
+        }
+
+        $item->delete();
+
+        return redirect()->back()->with('success', 'lol');
+    }
+
+    public function updateItem(Request $request, Item $item)
+    {
+        if (Gate::allows('masyarakat')) {
+            abort(403);
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'date' => 'required|date',
+            'price' => 'required',
+            'desc' => 'required|string'
+        ]);
+
+        $item->update([
+            'name' => $request->name,
+            'date' => $request->date,
+            'starting_price' => $request->price,
+            'desc' => $request->desc,
+            'operator_id' => Auth::user()->operators[0]->id
+        ]);
+
+        
+            $images = $request->pics;
+
+            if ($images) {
+
+
+                if ($item->hasMedia('item')) {
+                    # code...
+                    $item->media()->delete($item->id);
+                    foreach($images as $key => $image) {
+                        $temporaryfile = TemporaryFile::where('folder', $image)->first();
+                        if ($temporaryfile) {
+                            
+                            try {
+                                $item->addMedia(storage_path('app/public/image/tmp/' . $image . '/' . $temporaryfile->filename))->toMediaCollection('item');
+                            } catch (DiskDoesNotExist $e) {
+                            } catch (FileDoesNotExist $e) {
+                            } catch (FileIsTooBig $e) {
+                            }
+        
+                            rmdir(storage_path('app/public/image/tmp/' . $image));
+                            $temporaryfile->delete();
+                        }
+                    }
                 }
             }
 

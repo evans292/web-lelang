@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function() {
              Route::delete('/{user}', [OperatorController::class, 'destroy'])->name('destroy');
         });
 
-        Route::get('item', [OperatorController::class, 'showItem'])->name('item');
+        Route::get('item', [OperatorController::class, 'showItems'])->name('item');
         Route::group(['prefix' => 'item', 'as' => 'item.'], function() {
             Route::get('/create', [OperatorController::class, 'registerItem'])->name('create');
             Route::post('/', [OperatorController::class, 'storeItem'])->name('store');

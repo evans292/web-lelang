@@ -12,10 +12,10 @@
             <i class="fas fa-bars"></i>
           </button>
           <a
-            class="font-semibold md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
+            class="text-red-700 md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
             href="{{ route('dashboard') }}"
           >
-          <i class="fas fa-gavel mr-2 text-2xl font-semibold" ></i>
+          <i class="fas fa-gavel mr-2 text-2xl font-semibold text-red-700" ></i>
             {{config('app.name', 'Laravel')}}
           </a>
           <ul class="md:hidden items-center flex flex-wrap list-none">
@@ -159,12 +159,12 @@
              <ul class="md:flex-col md:min-w-full flex flex-col list-none">
 
                <li class="items-center">
-                 <x-side-link :href="route('operator.item')" :active="request()->routeIs('operator.item')">
-                   <i class="fas fa-file-alt mr-2 text-sm {{ (request()->routeIs('operator.item')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+                 <x-side-link :href="route('operator.item')" active="">
+                   <i class="fas fa-file-alt mr-2 text-sm " ></i>
                    {{ __('Laporan') }}
                  </x-side-link>
-                 <x-side-link :href="route('operator.item')" :active="request()->routeIs('operator.item')">
-                  <i class="fas fa-history mr-2 text-sm {{ (request()->routeIs('operator.item')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+                 <x-side-link :href="route('operator.item')" active="">
+                  <i class="fas fa-history mr-2 text-sm " ></i>
                   {{ __('Riwayat Lelang') }}
                 </x-side-link>
                </li>
