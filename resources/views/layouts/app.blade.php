@@ -32,7 +32,7 @@
         </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-50">
+        <div class="min-h-screen bg-gradient-to-r from-red-400 to-blue-500">
             @include('layouts.navigation')
 
             <!-- Page Heading -->

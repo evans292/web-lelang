@@ -25,7 +25,10 @@ class OperatorController extends Controller
             abort(403);
         }
 
-        return view('operator.index');
+        $count_op = Operator::all()->count();
+        $count_it = Item::all()->count();
+
+        return view('operator.index', compact('count_op', 'count_it'));
     }
 
     public function showOperators()

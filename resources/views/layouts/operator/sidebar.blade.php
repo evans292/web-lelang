@@ -160,7 +160,7 @@
 
                <li class="items-center">
                  <x-side-link :href="route('operator.item')" active="">
-                   <i class="fas fa-file-alt mr-2 text-sm " ></i>
+                   <i class="fas fa-file-alt mr-3 text-sm " ></i>
                    {{ __('Laporan') }}
                  </x-side-link>
                  <x-side-link :href="route('operator.item')" active="">
