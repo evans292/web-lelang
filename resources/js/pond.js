@@ -88,9 +88,9 @@ window.greet = function(args, position = 'top')
 window.success = function(args) 
 {
     Vue.$toast.success(`${args}`, {
-        duration: 1500,
+        duration: 2000,
         dismissible: true,
-        position: 'bottom-right'
+        position: 'top-right'
        })    
 }
 

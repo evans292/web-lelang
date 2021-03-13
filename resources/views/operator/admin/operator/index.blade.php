@@ -77,13 +77,13 @@
                             {{ $data->user->role->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <form id="{{ $data->id }}" action="{{ route('operator.operator-list.destroy', ['user' => $data->user_id]) }}" method="POST">
+                                <form id="{{ $data->id }}" action="{{ route('operator.operator-list.destroy', ['operator_list' => $data->user_id]) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                   </form>
                                   <a href="#" onclick="deleteConfirm('{{ $data->name }}', '{{ $data->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
-                                  <a href="{{ route('operator.operator-list.edit', ['user' => $data->user_id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
-                                <a href="{{ route('operator.operator-list.show', ['operator' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
+                                  <a href="{{ route('operator.operator-list.edit', ['operator_list' => $data->user_id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
+                                <a href="{{ route('operator.operator-list.show', ['operator_list' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
                                 </td>
                         </tr>
                         @endforeach            

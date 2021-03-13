@@ -42,7 +42,7 @@
         @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() { 
-                success('Lelang diperabarui!')
+                success('Lelang diperbarui!')
             }, true); 
         </script>
         @endif

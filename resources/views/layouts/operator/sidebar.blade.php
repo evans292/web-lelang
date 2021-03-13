@@ -108,8 +108,8 @@
   
             <ul class="md:flex-col md:min-w-full flex flex-col list-none">
               <li class="items-center">
-                <x-side-link :href="route('operator.operator-list')" :active="request()->routeIs('operator.operator-list')">
-                  <i class="fas fa-user-shield mr-2 text-sm {{ (request()->routeIs('operator.operator-list')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+                <x-side-link :href="route('operator.operator-list.index')" :active="request()->routeIs('operator.operator-list.index')">
+                  <i class="fas fa-user-shield mr-2 text-sm {{ (request()->routeIs('operator.operator-list.index')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
                   {{ __('Data Operator') }}
                 </x-side-link>
               </li>
@@ -137,8 +137,8 @@
 
             <ul class="md:flex-col md:min-w-full flex flex-col list-none">
               <li class="items-center">
-                <x-side-link :href="route('operator.item')" :active="request()->routeIs('operator.item')">
-                  <i class="fas fa-cubes mr-2 text-sm {{ (request()->routeIs('operator.item')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+                <x-side-link :href="route('operator.item.index')" :active="request()->routeIs('operator.item.index')">
+                  <i class="fas fa-cubes mr-2 text-sm {{ (request()->routeIs('operator.item.index')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
                   {{ __('Data Barang') }}
                 </x-side-link>
               </li>
@@ -159,8 +159,8 @@
  
            <ul class="md:flex-col md:min-w-full flex flex-col list-none">
              <li class="items-center">
-               <x-side-link :href="route('operator.auction')" :active="request()->routeIs('operator.auction')">
-                 <i class="fas fa-gavel mr-2 text-sm {{ (request()->routeIs('operator.auction')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+               <x-side-link :href="route('operator.auction.index')" :active="request()->routeIs('operator.auction.index')">
+                 <i class="fas fa-gavel mr-2 text-sm {{ (request()->routeIs('operator.auction.index')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
                  {{ __('Data Lelang') }}
                </x-side-link>
              </li>
@@ -189,11 +189,11 @@
              <ul class="md:flex-col md:min-w-full flex flex-col list-none">
 
                <li class="items-center">
-                 <x-side-link :href="route('operator.item')" active="">
+                 <x-side-link :href="route('operator.item.index')" active="">
                    <i class="fas fa-file-alt mr-3 text-sm " ></i>
                    {{ __('Laporan') }}
                  </x-side-link>
-                 <x-side-link :href="route('operator.item')" active="">
+                 <x-side-link :href="route('operator.item.index')" active="">
                   <i class="fas fa-history mr-2 text-sm " ></i>
                   {{ __('Riwayat Lelang') }}
                 </x-side-link>

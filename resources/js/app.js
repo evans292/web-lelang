@@ -100,7 +100,7 @@ window.success = function(args)
     Vue.$toast.success(`${args}`, {
         duration: 1500,
         dismissible: true,
-        position: 'bottom-right'
+        position: 'top-right'
        })    
 }
 

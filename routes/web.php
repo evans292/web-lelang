@@ -5,7 +5,10 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Petugas\PetugasController;
 use App\Http\Controllers\Masyarakat\MasyarakatController;
+use App\Http\Controllers\Operator\AuctionController;
+use App\Http\Controllers\Operator\ItemController;
 use App\Http\Controllers\Operator\OperatorController;
+use App\Http\Controllers\Operator\UserController;
 use App\Http\Controllers\UploadController;
 
 /*
@@ -41,43 +44,20 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'operator', 'as' => 'operator.'], function() {
         Route::get('dashboard', [OperatorController::class, 'index'])->name('dashboard');
 
-        Route::get('operator-list', [OperatorController::class, 'showOperators'])->name('operator-list');
-        Route::group(['prefix' => 'operator-list', 'as' => 'operator-list.'], function() {
-            Route::get('/create', [OperatorController::class, 'registerOperator'])->name('create');
-            Route::post('/', [OperatorController::class, 'storeOperator'])->name('store');
-            Route::get('/{user}/edit', [OperatorController::class, 'editOperator'])->name('edit');
-            Route::get('/{operator}', [OperatorController::class, 'showOperator'])->name('show');
-            Route::patch('/{user}', [OperatorController::class, 'updateOperator'])->name('update');
-            Route::delete('/{user}', [OperatorController::class, 'destroy'])->name('destroy');
-        });
+        Route::resource('operator-list', UserController::class)->except([
+            'showPeoples', 'showPeople'
+        ]);
         
-        Route::get('people', [OperatorController::class, 'showPeoples'])->name('people');
+        Route::get('people', [UserController::class, 'showPeoples'])->name('people');
         Route::group(['prefix' => 'people', 'as' => 'people.'], function() {
-             Route::get('/{people}', [OperatorController::class, 'showPeople'])->name('show');
-             Route::delete('/{user}', [OperatorController::class, 'destroy'])->name('destroy');
+             Route::get('/{people}', [UserController::class, 'showPeople'])->name('show');
+             Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
         });
 
-        Route::get('item', [OperatorController::class, 'showItems'])->name('item');
-        Route::group(['prefix' => 'item', 'as' => 'item.'], function() {
-            Route::get('/create', [OperatorController::class, 'registerItem'])->name('create');
-            Route::post('/', [OperatorController::class, 'storeItem'])->name('store');
-            Route::get('/{item}/edit', [OperatorController::class, 'editItem'])->name('edit');
-            Route::get('/{item}', [OperatorController::class, 'showItem'])->name('show');
-            Route::patch('/{item}', [OperatorController::class, 'updateItem'])->name('update');
-            Route::delete('/{item}', [OperatorController::class, 'destroyItem'])->name('destroy');
-       });
+        Route::resource('item', ItemController::class);
+        Route::resource('auction', AuctionController::class);
 
-      Route::get('auction', [OperatorController::class, 'showAuctions'])->name('auction');
-      Route::get('bid-list', [OperatorController::class, 'showBids'])->name('bid');
-        Route::group(['prefix' => 'auction', 'as' => 'auction.'], function() {
-            Route::get('/create', [OperatorController::class, 'registerAuction'])->name('create');
-            Route::post('/', [OperatorController::class, 'storeAuction'])->name('store');
-            Route::get('/{auction}/edit', [OperatorController::class, 'editAuction'])->name('edit');
-            Route::get('/{auction}', [OperatorController::class, 'showAuction'])->name('show');
-            Route::patch('/{auction}', [OperatorController::class, 'updateAuction'])->name('update');
-            Route::delete('/{auction}', [OperatorController::class, 'destroyAuction'])->name('destroy');
-       });
-
+        Route::get('bid-list', [OperatorController::class, 'showBids'])->name('bid');
 
       });
 
