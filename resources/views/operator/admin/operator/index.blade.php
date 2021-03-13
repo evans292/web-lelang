@@ -69,7 +69,7 @@
                             <div class="text-sm text-gray-500">{{ Str::limit($data->address, 20) }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                 {{ $data->phone }}
                             </span>
                             </td>

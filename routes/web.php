@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Masyarakat\BidController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Petugas\PetugasController;
 use App\Http\Controllers\Masyarakat\MasyarakatController;
@@ -57,7 +58,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('item', ItemController::class);
         Route::resource('auction', AuctionController::class);
 
-        Route::get('bid-list', [OperatorController::class, 'showBids'])->name('bid');
+        Route::resource('bid-list', BidController::class);
 
       });
 
