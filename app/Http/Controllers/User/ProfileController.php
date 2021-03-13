@@ -30,7 +30,7 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required',
             'birthdate' => 'required|date',
-            'phone' => 'max:12|unique:people|unique:operators',
+            'phone' => 'max:12|unique:people,phone,' . $profileid . '|unique:operators,phone,' . $profileid,
         ]);
    
         $user = User::findOrFail($userid);
@@ -68,9 +68,9 @@ class ProfileController extends Controller
 
             $temporaryfile = TemporaryFile::where('folder', $request->pic)->first();
             if ($temporaryfile) {
-                $user->addMedia(storage_path('app/public/profilepic/tmp/' . $request->pic . '/' . $temporaryfile->filename))
+                $user->addMedia(storage_path('app/public/image/tmp/' . $request->pic . '/' . $temporaryfile->filename))
                 ->toMediaCollection('avatar');
-                rmdir(storage_path('app/public/profilepic/tmp/' . $request->pic));
+                rmdir(storage_path('app/public/image/tmp/' . $request->pic));
                 $temporaryfile->delete();
             }
         }
