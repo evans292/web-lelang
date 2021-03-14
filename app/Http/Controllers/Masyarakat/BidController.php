@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Masyarakat;
 
 use App\Models\Bid;
+use App\Models\Item;
+use App\Models\Auction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class BidController extends Controller
@@ -31,9 +34,17 @@ class BidController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Auction $auction, Item $item)
     {
         //
+        $bid = null;
+
+        if (Auth::user()->role_id === 3) {
+            # code...
+            $bid = Bid::where('item_id', $item->id)->where('people_id', Auth::user()->people[0]->id)->first();
+        }
+
+        return view('masyarakat.place-bid', compact('auction', 'bid'));
     }
 
     /**
@@ -45,6 +56,20 @@ class BidController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->bid >= $request->starting_price) {
+            $request->validate([
+                'bid' => 'required'
+            ]);
+    
+            Bid::create([
+                'item_id' => $request->item_id,
+                'people_id' => Auth::user()->people[0]->id,
+                'bid_price' => $request->bid
+            ]);
+            return redirect()->back()->with('success', 'lol');
+        } else {
+            return redirect()->back()->with('fail', 'lol');
+        }
     }
 
     /**

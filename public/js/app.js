@@ -6939,6 +6939,14 @@ window.success = function (args) {
     dismissible: true,
     position: 'top-right'
   });
+};
+
+window.failed = function (args) {
+  vue__WEBPACK_IMPORTED_MODULE_17__.default.$toast.error("".concat(args), {
+    duration: 1500,
+    dismissible: true,
+    position: 'top-right'
+  });
 }; // ============= POPPER =====================================
 
 /* Sidebar - Side navigation menu on mobile/responsive mode */

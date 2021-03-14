@@ -104,6 +104,15 @@ window.success = function(args)
        })    
 }
 
+window.failed = function(args) 
+{
+    Vue.$toast.error(`${args}`, {
+        duration: 1500,
+        dismissible: true,
+        position: 'top-right'
+       })    
+}
+
 // ============= POPPER =====================================
 
 /* Sidebar - Side navigation menu on mobile/responsive mode */

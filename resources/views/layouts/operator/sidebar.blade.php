@@ -167,8 +167,8 @@
              </li>
 
              <li class="items-center">
-               <x-side-link :href="route('operator.bid-list.index')" :active="request()->routeIs('operator.bid-list.index')">
-                 <i class="fas fa-users mr-2 text-sm {{ (request()->routeIs('operator.bid-list.index')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
+               <x-side-link :href="route('bid-list.index')" :active="request()->routeIs('bid-list.index')">
+                 <i class="fas fa-users mr-2 text-sm {{ (request()->routeIs('bid-list.index')) ? 'text-red-500' : 'text-gray-800'}}" ></i>
                  {{ __('Daftar Penawaran') }}
                </x-side-link>
              </li>

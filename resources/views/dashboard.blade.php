@@ -19,7 +19,12 @@
                             <span class="font-bold text-5xl leading-none align-baseline text-white">@idr($auc->item->starting_price)</span>
                         </div>
                         <div class="align-bottom">
-                            <a class="bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="#"><i class="fas fa-gavel -ml-2 mr-2"></i> TAWAR SEKARANG</a>
+                        @can('masyarakat')
+                            <a class="bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="{{ route('bid-list.create', ['auction' => $auc->id, 'item' => $auc->item->id]) }}"><i class="fas fa-gavel -ml-2 mr-2"></i> TAWAR SEKARANG</a>
+                        @endcan
+                        @canany(['admin', 'petugas'])
+                        <a class="bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="{{ route('bid-list.create', ['auction' => $auc->id, 'item' => $auc->item->id]) }}"><i class="fas fa-eye -ml-2 mr-2"></i> LIHAT DETAIL</a>
+                         @endcanany
                         </div>
                     </div>
                 </div>
@@ -54,15 +59,26 @@
                             <p><span class="text-gray-900 font-bold">{{ $data->item->getMedia('item')->count() }}</span> Foto</p>
                         </div>
                     </div>
-                    <a class="text-center bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="#">
+                    @can('masyarakat')
+                    <a class="text-center bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->id, 'item' => $auc->item->id]) }}">
                         <i class="fas fa-gavel -ml-2 mr-2"></i> TAWAR SEKARANG
                     </a>
+                    @endcan
+                    @canany(['petugas', 'admin'])
+                    <a class="text-center bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->id, 'item' => $auc->item->id]) }}">
+                        <i class="fas fa-eye -ml-2 mr-2"></i> LIHAT DETAIL
+                    </a>
+                    @endcanany
                 </div>
             </div>
         </div>
         @endforeach
+
     </div>
     
+    <div class="flex justify-center"> 
+    {{ $auction->links() }}
+    </div>
 
     
 

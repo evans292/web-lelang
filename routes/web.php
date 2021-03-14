@@ -55,9 +55,6 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::resource('item', ItemController::class);
         Route::resource('auction', AuctionController::class);
-
-        Route::resource('bid-list', BidController::class);
-
       });
 
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
@@ -71,4 +68,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'role:masyarakat', 'prefix' => 'masyarakat', 'as' => 'masyarakat.'], function() {
         Route::get('masyarakat-page', [MasyarakatController::class, 'index'])->name('masyarakat-page');
     });
+
+    Route::resource('bid-list', BidController::class)->except([
+        'create'
+    ]);
+
+    Route::get('/bid-list/{auction}/{item}/create', [BidController::class, 'create'])->name('bid-list.create');
 });
