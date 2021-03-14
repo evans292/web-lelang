@@ -56,6 +56,10 @@ class BidController extends Controller
     public function store(Request $request)
     {
         //
+        if (Gate::allows('admin') || Gate::allows('petugas')) {
+            abort(403);
+        }
+
         if($request->bid >= $request->starting_price) {
             $request->validate([
                 'bid' => 'required'
