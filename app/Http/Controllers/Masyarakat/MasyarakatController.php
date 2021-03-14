@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Masyarakat;
 
+use App\Models\Bid;
 use App\Models\Auction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MasyarakatController extends Controller
 {
@@ -19,6 +21,8 @@ class MasyarakatController extends Controller
 
     public function index()
     {
-        return view('masyarakat.index');
+        $bids = Bid::where('people_id', Auth::user()->people[0]->id)->paginate(10);
+
+        return view('masyarakat.index', compact('bids'));
     }
 }

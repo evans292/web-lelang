@@ -1,4 +1,36 @@
 <x-app-layout>
+    <x-slot name="style">
+        <style>
+            .fancy {
+            line-height: 0.5;
+            text-align: left;
+            }
+            .fancy span {
+            display: inline-block;
+            position: relative;  
+            }
+
+            .fancy span:after {
+            content: "";
+            position: absolute;
+            height: 5px;
+            border-bottom: 1px solid white;
+            top: 13px;
+            width: 1000px;
+            }
+            /* .fancy span:before {
+            right: 100%;
+            margin-right: 15px;
+            } */
+            .fancy span:after {
+            left: 100%;
+            margin-left: 15px;
+            }
+            }
+        </style>
+    </x-slot>
+
+    @if ($auc !== null)
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="md:flex items-center -mx-10">
@@ -18,7 +50,8 @@
                             <span class="text-2xl text-white leading-none align-baseline">Rp.</span>
                             <span class="font-bold text-5xl leading-none align-baseline text-white">@idr($auc->item->starting_price)</span>
                         </div>
-                        <div class="align-bottom">
+                    </div>
+                    <div class="align-bottom mt-10">
                         @can('masyarakat')
                             <a class="bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="{{ route('bid-list.create', ['auction' => $auc->id, 'item' => $auc->item->id]) }}"><i class="fas fa-gavel -ml-2 mr-2"></i> TAWAR SEKARANG</a>
                         @endcan
@@ -26,11 +59,12 @@
                         <a class="bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="{{ route('bid-list.create', ['auction' => $auc->id, 'item' => $auc->item->id]) }}"><i class="fas fa-eye -ml-2 mr-2"></i> LIHAT DETAIL</a>
                          @endcanany
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <p class="subtitle fancy"><span class="text-2xl text-white mx-10 mt-10">Galeri Lot Lelang</span></p>
 
     <div class="flex flex-row-reverse flex-wrap px-4 ">
         @foreach ($auction as $data)
@@ -60,12 +94,12 @@
                         </div>
                     </div>
                     @can('masyarakat')
-                    <a class="text-center bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->id, 'item' => $auc->item->id]) }}">
+                    <a class="text-center bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->id, 'item' => $data->item->id]) }}">
                         <i class="fas fa-gavel -ml-2 mr-2"></i> TAWAR SEKARANG
                     </a>
                     @endcan
                     @canany(['petugas', 'admin'])
-                    <a class="text-center bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->id, 'item' => $auc->item->id]) }}">
+                    <a class="text-center bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->id, 'item' => $data->item->id]) }}">
                         <i class="fas fa-eye -ml-2 mr-2"></i> LIHAT DETAIL
                     </a>
                     @endcanany
@@ -79,6 +113,20 @@
     <div class="flex justify-center"> 
     {{ $auction->links() }}
     </div>
+    @else
+    <div class="py-12">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    Sedang tidak ada barang lelang, silahkan kembali nanti :)
+                </div>
+            </div>
+        </div>
+    </div> 
+    @endif
+
+
+    
 
     
 

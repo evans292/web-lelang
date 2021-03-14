@@ -85,6 +85,7 @@ class BidController extends Controller
     public function show(Bid $bid)
     {
         //
+
     }
 
     /**
@@ -108,6 +109,19 @@ class BidController extends Controller
     public function update(Request $request, Bid $bid)
     {
         //
+        if (Gate::allows('admin') || Gate::allows('masyarakat')) {
+            abort(403);
+        }
+
+        $auc = Auction::where('item_id', $bid->item_id)->first();
+
+        $auc->update([
+            'bid_id' => $bid->id,
+            'final_price' => $bid->bid_price,
+            'status' => 'close'
+        ]);
+
+        return redirect()->back()->with('success', 'lol');
     }
 
     /**

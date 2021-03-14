@@ -72,6 +72,22 @@ window.deleteConfirm = function(title, formId)
     });
 }
 
+window.winnerConfirm = function(title, formId)
+{
+    Swal.fire({
+        icon: 'question',
+        text: `Pilih ${title} sebagai pemenang ?`,
+        showCancelButton: true,
+        confirmButtonText: 'Pilih',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#34d399',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(formId).submit();
+        }
+    });
+}
+
 // ============= VUE =====================================
 
 Vue.use(VueToast);

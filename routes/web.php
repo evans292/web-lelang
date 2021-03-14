@@ -66,12 +66,13 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::group(['middleware' => 'role:masyarakat', 'prefix' => 'masyarakat', 'as' => 'masyarakat.'], function() {
-        Route::get('masyarakat-page', [MasyarakatController::class, 'index'])->name('masyarakat-page');
+        Route::get('history-lelang', [MasyarakatController::class, 'index'])->name('masyarakat-page');
     });
 
     Route::resource('bid-list', BidController::class)->except([
-        'create'
+        'create', 'update'
     ]);
 
     Route::get('/bid-list/{auction}/{item}/create', [BidController::class, 'create'])->name('bid-list.create');
+    Route::patch('/bid-list/{bid}', [BidController::class, 'update'])->name('bid-list.update');
 });

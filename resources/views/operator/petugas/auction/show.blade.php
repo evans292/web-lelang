@@ -264,11 +264,11 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         @if ($auction->bid === null)
-                            <form id="{{ $data->id }}" action="#" method="POST">
+                            <form id="{{ $data->id }}" action="{{ route('bid-list.update', ['bid' => $data->id]) }}" method="POST">
                                 @csrf
-                                @method('delete')
+                                @method('patch')
                               </form>
-                              <a href="#" onclick="deleteConfirm('{{ $data->name }}', '{{ $data->id }}')"><i class="fas fa-crown text-green-400 mr-1"></i></a>
+                              <a href="#" onclick="winnerConfirm('{{ $data->people->name }}', '{{ $data->id }}')"><i class="fas fa-crown text-green-400 mr-1"></i></a>
                             @else
                               @if ($auction->bid->people->name === $data->people->name)
                               Dipilih
@@ -291,5 +291,14 @@
       </div>
   </div>
 </div>
-  
-  </x-operator-layout>
+
+<x-slot name="script">
+  @if (session('success'))
+  <script>
+      document.addEventListener('DOMContentLoaded', function() { 
+          success('Pemenang lelang telah ditetapkan!')
+      }, true); 
+  </script>
+  @endif
+</x-slot>
+</x-operator-layout>

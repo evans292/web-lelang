@@ -75967,6 +75967,21 @@ window.deleteConfirm = function (title, formId) {
       document.getElementById(formId).submit();
     }
   });
+};
+
+window.winnerConfirm = function (title, formId) {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+    icon: 'question',
+    text: "Pilih ".concat(title, " sebagai pemenang ?"),
+    showCancelButton: true,
+    confirmButtonText: 'Pilih',
+    cancelButtonText: 'Batal',
+    confirmButtonColor: '#34d399'
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      document.getElementById(formId).submit();
+    }
+  });
 }; // ============= VUE =====================================
 
 
