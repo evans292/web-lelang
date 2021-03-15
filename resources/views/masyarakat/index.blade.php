@@ -41,11 +41,13 @@
             <div class="max-w-sm w-full sm:w-1/2 lg:w-full py-6 px-3">
                 <div class="bg-white shadow-xl rounded-lg overflow-hidden w-80">
                     <div class="bg-cover bg-center h-56 p-4" style="background-image: url({{ $data->item->getMedia('item')[0]->getUrl() }})">
-                        {{-- <div class="flex justify-end">
-                            <svg class="h-6 w-6 text-white fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M12.76 3.76a6 6 0 0 1 8.48 8.48l-8.53 8.54a1 1 0 0 1-1.42 0l-8.53-8.54a6 6 0 0 1 8.48-8.48l.76.75.76-.75zm7.07 7.07a4 4 0 1 0-5.66-5.66l-1.46 1.47a1 1 0 0 1-1.42 0L9.83 5.17a4 4 0 1 0-5.66 5.66L12 18.66l7.83-7.83z"></path>
-                            </svg>
-                        </div> --}}
+                        <div class="flex justify-end">
+                            @if ($data->auction !== null)
+                                <i class="fas fa-crown text-yellow-400"></i>
+                            @else
+                                <i class="fas fa-frown text-red-400"></i>
+                            @endif
+                        </div>
                     </div>
                     <div class="p-4">
                         <p class="uppercase tracking-wide text-sm font-bold text-gray-700">{{ $data->item->name }}</p>
@@ -63,15 +65,16 @@
                         </div>
                     </div>
                     @can('masyarakat')
-                    <a class="text-center bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->id, 'item' => $data->item->id]) }}">
+                    @if ($data->item->auction->status === 'open')
+                    <a class="text-center bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->item->auction->id, 'item' => $data->item->id]) }}">
                         <i class="fas fa-gavel -ml-2 mr-2"></i> TAWAR SEKARANG
                     </a>
-                    @endcan
-                    @canany(['petugas', 'admin'])
-                    <a class="text-center bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->id, 'item' => $data->item->id]) }}">
+                    @else
+                    <a class="text-center bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->item->auction->id, 'item' => $data->item->id]) }}">
                         <i class="fas fa-eye -ml-2 mr-2"></i> LIHAT DETAIL
                     </a>
-                    @endcanany
+                    @endif
+                    @endcan
                 </div>
             </div>
         </div>
