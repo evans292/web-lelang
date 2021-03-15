@@ -19,6 +19,6 @@ class ReportController extends Controller
 
     public function exportExcel($tgl1, $tgl2)
     {
-        return (new AuctionsExport($tgl1, $tgl2))->download('invoices.xlsx');
+        return (new AuctionsExport($tgl1, $tgl2))->download("Laporan-Lelang-$tgl1-$tgl2.xlsx");
     }
 }
