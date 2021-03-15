@@ -9,6 +9,7 @@ use App\Http\Controllers\Masyarakat\MasyarakatController;
 use App\Http\Controllers\Operator\AuctionController;
 use App\Http\Controllers\Operator\ItemController;
 use App\Http\Controllers\Operator\OperatorController;
+use App\Http\Controllers\Operator\ReportController;
 use App\Http\Controllers\Operator\UserController;
 use App\Http\Controllers\UploadController;
 
@@ -55,6 +56,9 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::resource('item', ItemController::class);
         Route::resource('auction', AuctionController::class);
+
+        Route::get('report', [ReportController::class, 'index'])->name('report');
+        Route::get('report/export_excel/{tgl1}/{tgl2}', [ReportController::class, 'exportExcel'])->name('report.excel');
       });
 
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
