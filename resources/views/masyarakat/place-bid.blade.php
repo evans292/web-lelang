@@ -195,6 +195,7 @@
                     @csrf
                     <input type="hidden" name="item_id" value="{{ $auction->item->id }}">
                     <input type="hidden" name="starting_price" value="{{ $auction->item->starting_price }}">
+                    <input type="hidden" name="item_name" value="{{ $auction->item->name }}">
 
                     <div class="mb-4">
                       <x-label for="bid" class="text-lg leading-6 font-medium text-gray-900" :value="__('Tempatkan penawaran')" />

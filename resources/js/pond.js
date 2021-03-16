@@ -1,6 +1,8 @@
 require('./bootstrap');
 require('alpinejs');
 
+import Pusher from 'pusher-js';
+
 import $ from "jquery";
 import { select2 } from "select2";
 import * as Popper from '@popperjs/core';
@@ -139,3 +141,18 @@ document.getElementById(dropdownID).classList.toggle("block");
 $('.select2').select2({
     placeholder: 'Pilih sebuah opsi'
 });
+
+// ============= PUSHER =====================================
+ // Enable pusher logging - don't include this in production
+ Pusher.logToConsole = true;
+
+ var pusher = new Pusher('3d6c1553ff23c1161207', {
+     cluster: 'ap1'
+   });
+
+ var channel = pusher.subscribe('my-channel');
+ channel.bind('form-submitted', function(data) {
+   Vue.$toast.info(`${data.text}`, {
+       position: 'top-right'
+ })
+ });

@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('operator-list', UserController::class)->except([
             'showPeoples', 'showPeople'
         ]);
-        
+
         Route::get('people', [UserController::class, 'showPeoples'])->name('people');
         Route::group(['prefix' => 'people', 'as' => 'people.'], function() {
              Route::get('/{people}', [UserController::class, 'showPeople'])->name('show');
@@ -57,7 +57,10 @@ Route::group(['middleware' => 'auth'], function() {
         });
 
         Route::resource('item', ItemController::class);
-        Route::resource('auction', AuctionController::class);
+        Route::resource('auction', AuctionController::class)->except([
+            'history'
+        ]);
+        Route::get('history', [AuctionController::class, 'history'])->name('history');
 
         Route::get('report', [ReportController::class, 'index'])->name('report');
         Route::get('report/export_excel/{tgl1}/{tgl2}', [ReportController::class, 'exportExcel'])->name('report.excel');

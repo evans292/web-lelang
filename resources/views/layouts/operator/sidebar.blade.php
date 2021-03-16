@@ -193,13 +193,19 @@
                    <i class="fas fa-file-alt mr-3 text-sm " ></i>
                    {{ __('Laporan') }}
                  </x-side-link>
-                 <x-side-link :href="route('operator.item.index')" active="">
-                  <i class="fas fa-history mr-2 text-sm " ></i>
-                  {{ __('Riwayat Lelang') }}
-                </x-side-link>
-               </li>
                </li>
              </ul>
+
+             <hr class="my-4 md:min-w-full" />
+             <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+
+              <li class="items-center">
+                <x-side-link :href="route('operator.history')" :active="request()->routeIs('operator.history')">
+                 <i class="fas fa-history mr-2 text-sm " ></i>
+                 {{ __('Riwayat Lelang') }}
+               </x-side-link>
+              </li>
+            </ul>
 
           </div>
         </div>

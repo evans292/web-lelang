@@ -24,7 +24,7 @@ class AuctionController extends Controller
             abort(403);
         }
 
-        $datas = Auction::paginate(10);
+        $datas = Auction::where('status', 'open')->paginate(10);
 
         return view('operator.petugas.auction.index', compact('datas'));
     }
@@ -155,5 +155,16 @@ class AuctionController extends Controller
         $auction->delete();
 
         return redirect()->back()->with('success', 'lol');
+    }
+
+    public function history()
+    {
+        if (Gate::allows('masyarakat')) {
+            abort(403);
+        }
+
+        $datas = Auction::where('status', 'close')->paginate(10);
+
+        return view('operator.petugas.auction.index', compact('datas')); 
     }
 }

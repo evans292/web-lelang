@@ -11,9 +11,12 @@
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                    @if (Request::segment(2) !== 'history')
                     <div class="text-right  mb-3">
-                    <a href="{{ route('operator.auction.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"><i class="fas fa-plus mr-2"></i>Lelang</a>
+                        <a href="{{ route('operator.auction.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"><i class="fas fa-plus mr-2"></i>Lelang</a>
                     </div>
+                    @endif
+                    @if ($datas->count() !== 0)
                     <div class="shadow overflow-hidden sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -99,6 +102,29 @@
                         </tbody>
                     </table>
                     </div>
+                    @else 
+                    @if (Request::segment(2) !== 'history')
+                    <div class="py-3">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-white border-b border-gray-200 text-gray-400">
+                                    Pelelangan kosong! 
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    @else
+                    <div class="py-3">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-white border-b border-gray-200 text-gray-400">
+                                    History kosong! 
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    @endif
+                    @endif
                 </div>
                 </div>
             </div>

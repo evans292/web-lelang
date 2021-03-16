@@ -155,7 +155,7 @@ $('.select2').select2({
 
  var channel = pusher.subscribe('my-channel');
  channel.bind('form-submitted', function(data) {
-   Vue.$toast.success(`${data.text}`, {
+   Vue.$toast.info(`${data.text}`, {
        position: 'top-right'
  })
  });

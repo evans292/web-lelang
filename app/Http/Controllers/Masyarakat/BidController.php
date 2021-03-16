@@ -6,6 +6,7 @@ use App\Models\Bid;
 use App\Models\Item;
 use App\Models\Auction;
 use Illuminate\Http\Request;
+use App\Events\FormSubmitted;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -70,6 +71,12 @@ class BidController extends Controller
                 'people_id' => Auth::user()->people[0]->id,
                 'bid_price' => $request->bid
             ]);
+
+            $peopleName = Auth::user()->people[0]->name;
+            
+            $bidPrice = number_format($request->bid, 0, ',', '.');
+            event(new FormSubmitted("$peopleName telah menawar $request->item_name dengan harga Rp. $bidPrice"));
+
             return redirect()->back()->with('success', 'lol');
         } else {
             return redirect()->back()->with('fail', 'lol');
@@ -120,6 +127,10 @@ class BidController extends Controller
             'final_price' => $bid->bid_price,
             'status' => 'close'
         ]);
+        
+        $itemName = $bid->item->name;
+        $winnerName = $bid->people->name;
+        event(new FormSubmitted("$winnerName telah memenangkan lelang $itemName"));
 
         return redirect()->back()->with('success', 'lol');
     }

@@ -6991,7 +6991,7 @@ var pusher = new (pusher_js__WEBPACK_IMPORTED_MODULE_0___default())('3d6c1553ff2
 });
 var channel = pusher.subscribe('my-channel');
 channel.bind('form-submitted', function (data) {
-  vue__WEBPACK_IMPORTED_MODULE_18__.default.$toast.success("".concat(data.text), {
+  vue__WEBPACK_IMPORTED_MODULE_18__.default.$toast.info("".concat(data.text), {
     position: 'top-right'
   });
 });

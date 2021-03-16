@@ -29,8 +29,9 @@
             }
         </style>
     </x-slot>
-
     @if ($auc !== null)
+    <p class="subtitle fancy"><span class="text-2xl text-white mx-10 mt-10">Barang Terbaru</span></p>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="md:flex items-center -mx-10">
