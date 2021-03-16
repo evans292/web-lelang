@@ -1,17 +1,18 @@
 <?php
 
+use App\Events\FormSubmitted;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Masyarakat\BidController;
-use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\Petugas\PetugasController;
-use App\Http\Controllers\Masyarakat\MasyarakatController;
-use App\Http\Controllers\Operator\AuctionController;
-use App\Http\Controllers\Operator\ItemController;
-use App\Http\Controllers\Operator\OperatorController;
-use App\Http\Controllers\Operator\ReportController;
-use App\Http\Controllers\Operator\UserController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Operator\ItemController;
+use App\Http\Controllers\Operator\UserController;
+use App\Http\Controllers\Masyarakat\BidController;
+use App\Http\Controllers\Operator\ReportController;
+use App\Http\Controllers\Petugas\PetugasController;
+use App\Http\Controllers\Operator\AuctionController;
+use App\Http\Controllers\Operator\OperatorController;
+use App\Http\Controllers\Masyarakat\MasyarakatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ use App\Http\Controllers\UploadController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 require __DIR__.'/auth.php';
 
@@ -60,6 +62,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('report', [ReportController::class, 'index'])->name('report');
         Route::get('report/export_excel/{tgl1}/{tgl2}', [ReportController::class, 'exportExcel'])->name('report.excel');
         Route::get('report/export_pdf/{tgl1}/{tgl2}', [ReportController::class, 'exportPdf'])->name('report.pdf');
+
       });
 
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {

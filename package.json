@@ -37,6 +37,7 @@
         "filepond-plugin-image-resize": "^2.0.7",
         "filepond-plugin-image-transform": "^3.7.5",
         "jquery": "^3.6.0",
+        "pusher-js": "^7.0.3",
         "select2": "^4.1.0-rc.0",
         "sweetalert2": "^10.15.5",
         "vue": "^2.6.12",

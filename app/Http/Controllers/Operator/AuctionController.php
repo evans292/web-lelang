@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Operator;
 use App\Models\Item;
 use App\Models\Auction;
 use Illuminate\Http\Request;
+use App\Events\FormSubmitted;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -68,6 +69,10 @@ class AuctionController extends Controller
             'auction_date' => $request->date,
             'operator_id' => Auth::user()->operators[0]->id
         ]);
+
+        $operatorName = Auth::user()->operators[0]->name;
+
+        event(new FormSubmitted("$operatorName telah menambah lelang baru"));
 
         return redirect()->back()->with('success', 'lol');
     }
