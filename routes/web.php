@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::get('report', [ReportController::class, 'index'])->name('report');
         Route::get('report/export_excel/{tgl1}/{tgl2}', [ReportController::class, 'exportExcel'])->name('report.excel');
+        Route::get('report/export_pdf/{tgl1}/{tgl2}', [ReportController::class, 'exportPdf'])->name('report.pdf');
       });
 
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {

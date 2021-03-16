@@ -1,4 +1,16 @@
-<table>
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 15px;
+    }
+</style>
+
+<h1>Laporan Lelang {{ $tgl1 }} - {{ $tgl2 }}</h1>
+
+<table style="width:100%">
     <thead>
     <tr>
         <th>No</th>

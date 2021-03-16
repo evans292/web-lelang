@@ -8,7 +8,6 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class AuctionsExport implements FromView, WithColumnWidths, WithStyles
@@ -23,8 +22,10 @@ class AuctionsExport implements FromView, WithColumnWidths, WithStyles
 
     public function view(): View
     {
-        return view('operator.both.report.excel', [
-            'auctions' => Auction::whereBetween('auction_date', [$this->tgl1, $this->tgl2])->get()
+        return view('operator.both.report.table', [
+            'auctions' => Auction::whereBetween('auction_date', [$this->tgl1, $this->tgl2])->get(),
+            'tgl1' => $this->tgl1,
+            'tgl2' => $this->tgl2,
         ]);
     }
 
@@ -46,7 +47,7 @@ class AuctionsExport implements FromView, WithColumnWidths, WithStyles
     {
         return [
             // Style the first row as bold text.
-            1    => ['font' => ['bold' => true]],
+            2    => ['font' => ['bold' => true]],
         ];
     }
 }
