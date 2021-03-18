@@ -22,7 +22,6 @@ class MasyarakatController extends Controller
     public function index()
     {
         $bids = Bid::where('people_id', Auth::user()->people[0]->id)->paginate(10);
-        $all = Auction::where('status', 'close')->paginate(10);
-        return view('masyarakat.index', compact('bids', 'all'));
+        return view('masyarakat.index', compact('bids'));
     }
 }
