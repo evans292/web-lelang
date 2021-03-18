@@ -7,19 +7,48 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About this Web-App
+## Web Lelang Online
 Aplikasi web berbasis laravel ini adalah ujikom paket 4 pilihan saya.
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Cara Install 
+1. Clone project ini 
+```
+git clone https://github.com/evans292/web-lelang.git
+```
+2. Pindah ke folder project
+```
+cd web-lelang
+```
+4. Jalankan composer install
+```
+composer install
+```
+5. Jalankan npm / yarn install
+```
+npm install 
+yarn install
+```
+4. Copy dan konfigurasi file .env (database, pusher, storage)
+```
+cp .env.example .env
+```
+5. Generate key baru
+```
+php artisan key:generate
+```
+6. Jalankan migrasi dan seeder
+```
+php artisan migrate --seeder
+```
+7. Buat symbionic link (pastikan di env FILESYSTEM_DRIVER=public)
+```
+php artisan storage:link
+```
+8. Compile css & js
+```
+npm run dev / yarn dev
+```
+9. Jalankan project
+```
+php artisan serve
+```
