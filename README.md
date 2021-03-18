@@ -38,7 +38,7 @@ php artisan key:generate
 ```
 6. Jalankan migrasi dan seeder
 ```
-php artisan migrate --seeder
+php artisan migrate --seed
 ```
 7. Buat symbionic link (pastikan di env FILESYSTEM_DRIVER=public)
 ```
