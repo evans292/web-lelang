@@ -11,75 +11,120 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200 flex justify-between">
+    <main class="profile-page mt-80">
+        <section class="relative block h-500-px">
+          <div
+            class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+            style="transform: translateZ(0px);"
+          >
+            <svg
+              class="absolute bottom-0 overflow-hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+              version="1.1"
+              viewBox="0 0 2560 100"
+              x="0"
+              y="0"
+            >
+              <polygon
+                class="text-gray-300 fill-current"
+                points="2560 0 2560 100 0 100"
+              ></polygon>
+            </svg>
+          </div>
+        </section>
+        <section class="relative py-16 bg-gradient-to-r from-red-400 to-blue-500">
+          <div class="container mx-auto px-4">
+            <div
+              class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+            >
+              <div class="px-6">
+                <div class="flex flex-wrap justify-center">
+                  <div
+                    class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center"
+                  >
+                    <div class="">
                     @if (Auth::user()->getMedia('avatar')->count() === 0)
-                    <img src="{{ asset('image/download.png') }}" class="rounded-full w-1/4 h-1/4"> 
+                      <img
+                        alt="..."
+                        src="{{ asset('image/download.png') }}"
+                        class="shadow-xl rounded-full max-h-150-px align-middle border-none absolute -m-16 -ml-20 lg:-ml-28 max-w-150-px"
+                      />
                     @else
-                    <img src="{{ Auth::user()->getMedia('avatar')[0]->getUrl() }}" class="rounded-full w-1/4 h-1/4">
+                        <img
+                        alt="..."
+                        src="{{ Auth::user()->getMedia('avatar')[0]->getUrl() }}"
+                        class="shadow-xl rounded-full max-h-150-px align-middle border-none absolute -m-16 -ml-20 lg:-ml-24 max-w-150-px"
+                    />
                     @endif
-                    <form method="post" class="w-full ml-5" action="{{ route('profile.update', ['userid' => $data->user_id, 'profileid' => $data->id]) }}" novalidate enctype="multipart/form-data">
-                        @csrf
-                        @method('patch')
-                        <div class="mb-4">
-                            <x-label for="name" :value="__('Nama*')" />
-                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $data->name }}" required />
-                            <x-validation-message name="name"/>
-                        </div>
-            
-                        <div class="mb-4">
-                            <x-label for="birthdate" :value="__('Tanggal Lahir*')" />
-                            <x-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" value="{{ $data->birthdate }}" required />
-                            <x-validation-message name="birthdate"/>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <x-label for="gender" value="{{ __('Jenis Kelamin') }}" />
-                            <select name="gender" id="gender" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm select2">
-                                <option value="" class="text-gray-400" selected>-- pilih jenis kelamin --</option>
-                                @foreach ($genders as $key => $gender)
-                                    <option value="{{ $key }}" {{ ($data->gender === $key) ? 'selected' : '' }}>{{ $gender }}</option>
-                                @endforeach
-                            </select>
-                            <x-validation-message name="gender"/>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <x-label for="address" value="{{ __('Alamat') }}" />
-                            <textarea name="address" id="address" cols="30" rows="10" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ $data->address }}</textarea>
-                            <x-validation-message name="address"/>
-                        </div>
-
-                        <div class="mb-4">
-                            <x-label for="phone" :value="__('No. Handphone')" />
-                            <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" value="{{ $data->phone }}" required />
-                            <x-validation-message name="phone"/>
-                        </div>
-
-                        <div class="mb-4">
-                            <x-label for="pic" :value="__('Foto Profil')" />
-                            <input type="file" name="pic" id="pic" accept="image/png, image/jpeg, image/gif" 
-                            data-max-file-size="3MB"
-                            class="bg-gray-100 block mt-1 w-40 mt-5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-sm shadow-sm">
-                            <x-validation-message name="pic"/>
-                        </div>
-
-                        <div class="flex items-center justify-end mt-4">            
-                            <x-button class="ml-3">
-                                {{ __('Perbarui') }}
-                            </x-button>
-                        </div>
-                    </form>
+                    </div>
+                  </div>
                 </div>
+                <div class="text-center mt-40">
+                  <h3
+                    class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
+                  >
+                    {{ $data->name }} 
+                    <a href="{{ route('profile.edit') }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1 text-sm"></i></a>
+                  </h3>
+                  @if ($data->address !== null )
+                  <div
+                    class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
+                  >
+                    <i
+                      class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
+                    ></i>
+                    {{ $data->address }}
+                  </div>
+                  @endif
+                  @if ($data->birthdate !== null )
+                  <div class="mb-2 text-gray-700 mt-10">
+                    <i class="fas fa-birthday-cake mr-2 text-lg text-gray-500"></i
+                    >{{ $data->birthdate->format('d M Y') }}
+                  </div>
+                  @endif
+                  @if ($data->birthdate !== null )
+                  <div class="mb-2 text-gray-700">
+                    <i class="fas fa-phone-alt mr-2 text-lg text-gray-500"></i
+                    >{{ $data->phone }}
+                  </div>
+                  @endif
+                </div>
+                @if (Auth::user()->role_id == 3)
+                <div class="mt-10 py-10 border-t border-gray-300 text-center">
+                    <div class="flex flex-wrap justify-center">
+                      <div class="w-full lg:w-4/12 px-4 lg:order-1">
+                          <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                            <div class="mr-4 p-3 text-center">
+                              <span
+                                class="text-xl font-bold block uppercase tracking-wide text-gray-700"
+                                >{{ $bidCount }}x</span
+                              ><span class="text-sm text-gray-500">Ikut Lelang</span>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                @else
+                <div class="mt-10 py-10 border-t border-gray-300 text-center">
+                    <div class="flex flex-wrap justify-center">
+                      <div class="w-full lg:w-4/12 px-4 lg:order-1">
+                          <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                            <div class="mr-4 p-3 text-center">
+                              <span class="text-sm text-gray-500">Halo operator :)</span>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                @endif
+              </div>
             </div>
-        </div>
-    </div>
+          </div>
+        </section>
+      </main>
 
-
-
-    <x-slot name="script">
+      <x-slot name="script">
         @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() { 

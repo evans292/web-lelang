@@ -210,7 +210,10 @@
                   </div>
                   </form>
                   @else
-                  Anda telah menawar barang ini dengan harga @currency($bid->bid_price)
+                  <div class="flex justify-between items-center">
+                    Anda telah menawar barang ini dengan harga @currency($bid->bid_price)
+                    <a href="{{ route('bid-list.edit', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
+                  </div>
                   @endif
                 </div>
             </div>
@@ -218,6 +221,7 @@
     </div>
     @endif
 
+    @if ($auction->item->bids->count() > 0)
     <div class="px-4">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="overflow-hidden sm:rounded-lg">
@@ -306,6 +310,8 @@
           </div>
       </div>
     </div>
+    @endif
+
 
     <x-slot name="script">
       @if (session('success'))

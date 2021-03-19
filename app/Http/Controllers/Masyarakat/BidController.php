@@ -10,6 +10,7 @@ use App\Events\FormSubmitted;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Broadcasting\BroadcastException;
 
 class BidController extends Controller
 {
@@ -75,7 +76,13 @@ class BidController extends Controller
             $peopleName = Auth::user()->people[0]->name;
             
             $bidPrice = number_format($request->bid, 0, ',', '.');
+
+        try {
             event(new FormSubmitted("$peopleName telah menawar $request->item_name dengan harga Rp. $bidPrice"));
+        } catch (BroadcastException $e) {
+            //throw $th;
+            echo 'Message: ' .$e->getMessage();
+        }
 
             return redirect()->back()->with('success', 'lol');
         } else {
@@ -101,9 +108,44 @@ class BidController extends Controller
      * @param  \App\Models\Bid  $bid
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bid $bid)
+    public function edit(Auction $auction, Item $item, Bid $bid)
     {
         //
+        if (Gate::allows('admin') || Gate::allows('petugas')) {
+            abort(403);
+        }
+
+        return view('masyarakat.edit-bid', compact('auction', 'item', 'bid'));
+    }
+
+    public function updateBid(Request $request, Auction $auction, Item $item, Bid $bid)
+    {
+        if (Gate::allows('admin') || Gate::allows('petugas')) {
+            abort(403);
+        }
+
+        if($request->bid >= $item->starting_price) {
+            $request->validate([
+                'bid' => 'required'
+            ]);
+
+        $bid->bid_price = $request->bid;
+        $bid->save();
+
+        $peopleName = Auth::user()->people[0]->name;
+        $bidPrice = number_format($request->bid, 0, ',', '.');
+            
+        try {
+            event(new FormSubmitted("$peopleName telah memperbarui tawaran untuk $item->name dengan harga Rp. $bidPrice"));
+        } catch (BroadcastException $e) {
+            //throw $th;
+            echo 'Message: ' .$e->getMessage();
+        }
+
+            return redirect()->back()->with('success', 'lol');
+        } else {
+            return redirect()->back()->with('fail', 'lol');
+        }
     }
 
     /**
@@ -113,7 +155,7 @@ class BidController extends Controller
      * @param  \App\Models\Bid  $bid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bid $bid)
+    public function updateAuction(Request $request, Bid $bid)
     {
         //
         if (Gate::allows('admin') || Gate::allows('masyarakat')) {
@@ -130,8 +172,13 @@ class BidController extends Controller
         
         $itemName = $bid->item->name;
         $winnerName = $bid->people->name;
-        event(new FormSubmitted("$winnerName telah memenangkan lelang $itemName"));
 
+        try {
+        event(new FormSubmitted("$winnerName telah memenangkan lelang $itemName"));
+        } catch (BroadcastException $e) {
+            //throw $th;
+            echo 'Message: ' .$e->getMessage();
+        }
         return redirect()->back()->with('success', 'lol');
     }
 

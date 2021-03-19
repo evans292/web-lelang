@@ -5,13 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\Operator\ItemController;
-use App\Http\Controllers\Operator\UserController;
+use App\Http\Controllers\Operator\{ItemController, UserController, ReportController, AuctionController, OperatorController};
 use App\Http\Controllers\Masyarakat\BidController;
-use App\Http\Controllers\Operator\ReportController;
 use App\Http\Controllers\Petugas\PetugasController;
-use App\Http\Controllers\Operator\AuctionController;
-use App\Http\Controllers\Operator\OperatorController;
 use App\Http\Controllers\Masyarakat\MasyarakatController;
 
 /*
@@ -39,7 +35,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('upload-multiple', [UploadController::class, 'storeMultiple']);
 
     Route::group(['prefix' => 'profile'], function () {
-        Route::get('/', [ProfileController::class, 'edit'])->name('profile');
+        Route::get('/', [ProfileController::class, 'index'])->name('profile');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/{userid}/{profileid}', [ProfileController::class, 'update'])->name('profile.update');
     });
 
@@ -85,5 +82,7 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 
     Route::get('/bid-list/{auction}/{item}/create', [BidController::class, 'create'])->name('bid-list.create');
-    Route::patch('/bid-list/{bid}', [BidController::class, 'update'])->name('bid-list.update');
+    Route::get('/bid-list/{auction}/{item}/{bid}/edit', [BidController::class, 'edit'])->name('bid-list.edit');
+    Route::patch('/bid-list/{auction}/{item}/{bid}', [BidController::class, 'updateBid'])->name('bid-list.update');
+    Route::patch('/bid-list/{bid}', [BidController::class, 'updateAuction'])->name('bid-list.updateAuction');
 });

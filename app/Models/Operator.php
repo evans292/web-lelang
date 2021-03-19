@@ -9,6 +9,7 @@ class Operator extends Model
 {
     use HasFactory;
     
+    protected $dates = ['birthdate'];
     protected $fillable = ['user_id',
         'name',
         'birthdate',

@@ -264,7 +264,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         @if ($auction->bid === null)
-                            <form id="{{ $data->id }}" action="{{ route('bid-list.update', ['bid' => $data->id]) }}" method="POST">
+                            <form id="{{ $data->id }}" action="{{ route('bid-list.updateAuction', ['bid' => $data->id]) }}" method="POST">
                                 @csrf
                                 @method('patch')
                               </form>

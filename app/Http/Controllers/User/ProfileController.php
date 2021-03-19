@@ -2,17 +2,37 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Bid;
 use App\Models\User;
 use App\Models\People;
 use App\Models\Operator;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\TemporaryFile;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     //
+
+    public function index()
+    {
+        $data = null;
+        $bidCount = 0;
+        if (Auth::user()->role_id === 1 || Auth::user()->role_id === 2) {
+            $data = Operator::findOrFail(Auth::user()->operators[0]->id);
+        } else {
+            $data = People::findOrFail(Auth::user()->people[0]->id);
+        }
+        $genders = ['L' => 'Laki - Laki', 'P' => 'Perempuan'];
+
+        if (Auth::user()->role_id == 3) {
+            $bidCount = Bid::where('people_id', Auth::user()->people[0]->id)->count();
+        }
+
+        return view('user.profile', compact('data', 'genders', 'bidCount'));
+    }
+
     public function edit()
     {
         $data = null;
@@ -22,7 +42,7 @@ class ProfileController extends Controller
             $data = People::findOrFail(Auth::user()->people[0]->id);
         }
         $genders = ['L' => 'Laki - Laki', 'P' => 'Perempuan'];
-        return view('user.profile', compact('data', 'genders'));
+        return view('user.edit-profile', compact('data', 'genders'));
     }
 
     public function update(Request $request, $userid, $profileid)

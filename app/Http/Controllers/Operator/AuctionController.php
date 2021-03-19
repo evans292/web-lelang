@@ -7,6 +7,7 @@ use App\Models\Auction;
 use Illuminate\Http\Request;
 use App\Events\FormSubmitted;
 use App\Http\Controllers\Controller;
+use Illuminate\Broadcasting\BroadcastException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -72,7 +73,13 @@ class AuctionController extends Controller
 
         $operatorName = Auth::user()->operators[0]->name;
 
-        event(new FormSubmitted("$operatorName telah menambah lelang baru"));
+        try {
+            event(new FormSubmitted("$operatorName telah menambah lelang baru"));
+        } catch (BroadcastException $e) {
+            //throw $th;
+            echo 'Message: ' .$e->getMessage();
+        }
+
 
         return redirect()->back()->with('success', 'lol');
     }
