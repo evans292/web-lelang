@@ -212,7 +212,15 @@
                   @else
                   <div class="flex justify-between items-center">
                     Anda telah menawar barang ini dengan harga @currency($bid->bid_price)
-                    <a href="{{ route('bid-list.edit', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
+                    <div>
+                      <form id="{{ $bid->id }}" action="{{ route('bid-list.destroy', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                      </form>
+                      <a href="{{ route('bid-list.edit', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
+                      <a href="#" onclick="deleteConfirm('{{ $bid->people->name }}', '{{ $bid->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
+                    </div>
+                   
                   </div>
                   @endif
                 </div>
@@ -324,6 +332,12 @@
       <script>
             document.addEventListener('DOMContentLoaded', function() { 
                 failed('Harga tidak boleh kurang dari harga awal!')
+            }, true); 
+        </script>
+      @elseif (session('delete'))
+      <script>
+            document.addEventListener('DOMContentLoaded', function() { 
+              success('Keluar lelang berhasil')
             }, true); 
         </script>
       @endif

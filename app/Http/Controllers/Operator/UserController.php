@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Operator;
 
+use App\Models\Bid;
 use App\Models\User;
 use App\Models\People;
 use App\Models\Operator;
@@ -172,6 +173,8 @@ class UserController extends Controller
             abort(403);
         }
 
-        return view('operator.admin.people.show', compact('people'));
+        $datas = Bid::where('people_id', $people->id)->get();
+
+        return view('operator.admin.people.show', compact('people', 'datas'));
     }
 }

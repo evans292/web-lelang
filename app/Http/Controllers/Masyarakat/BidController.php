@@ -188,8 +188,25 @@ class BidController extends Controller
      * @param  \App\Models\Bid  $bid
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bid $bid)
+    public function destroy(Auction $auction, Item $item, Bid $bid)
     {
         //
+        if (Gate::allows('admin') || Gate::allows('petugas')) {
+            abort(403);
+        }
+
+        $bid->delete();
+
+        $itemName = $bid->item->name;
+        $peopleName = $bid->people->name;
+
+        try {
+            event(new FormSubmitted("$peopleName telah keluar dari lelang $itemName"));
+            } catch (BroadcastException $e) {
+                //throw $th;
+                echo 'Message: ' .$e->getMessage();
+            }
+
+        return redirect()->back()->with('delete', 'lol');
     }
 }

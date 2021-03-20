@@ -84,5 +84,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/bid-list/{auction}/{item}/create', [BidController::class, 'create'])->name('bid-list.create');
     Route::get('/bid-list/{auction}/{item}/{bid}/edit', [BidController::class, 'edit'])->name('bid-list.edit');
     Route::patch('/bid-list/{auction}/{item}/{bid}', [BidController::class, 'updateBid'])->name('bid-list.update');
+    Route::delete('/bid-list/{auction}/{item}/{bid}', [BidController::class, 'destroy'])->name('bid-list.destroy');
     Route::patch('/bid-list/{bid}', [BidController::class, 'updateAuction'])->name('bid-list.updateAuction');
 });
