@@ -111,7 +111,7 @@
                       <div class="w-full lg:w-4/12 px-4 lg:order-1">
                           <div class="flex justify-center py-4 lg:pt-4 pt-8">
                             <div class="mr-4 p-3 text-center">
-                              <span class="text-sm text-gray-500">Halo operator :)</span>
+                              <span class="text-sm text-gray-500 hidden">Halo operator :)</span>
                             </div>
                           </div>
                         </div>

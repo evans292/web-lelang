@@ -50,7 +50,7 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required',
             'birthdate' => 'required|date',
-            'phone' => 'max:12|unique:people,phone,' . $profileid . '|unique:operators,phone,' . $profileid,
+            'phone' => 'required|max:12|unique:people,phone,' . $profileid . '|unique:operators,phone,' . $profileid,
         ]);
    
         $user = User::findOrFail($userid);

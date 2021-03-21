@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="pic" :value="__('Foto Barang* (png/jpeg/jpg/gif)')" />
+                            <x-label for="pic" :value="__('Foto Barang* (png/jpeg/jpg/gif) maksimal : 3 foto')" />
                             <input type="file" name="pics[]" id="pics" required accept="image/png, image/jpeg, image/gif, image/jpg" 
                             multiple 
                             data-allow-reorder="true"

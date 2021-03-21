@@ -185,6 +185,7 @@
   </div>
 </div>
 
+@if ($auction->item->bids->count() > 0)
 <div class="px-4">
   <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="overflow-hidden sm:rounded-lg">
@@ -263,20 +264,22 @@
                         @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        @if ($auction->bid === null)
-                            <form id="{{ $data->id }}" action="{{ route('bid-list.updateAuction', ['bid' => $data->id]) }}" method="POST">
-                                @csrf
-                                @method('patch')
-                              </form>
-                              <a href="#" onclick="winnerConfirm('{{ $data->people->name }}', '{{ $data->id }}')"><i class="fas fa-crown text-green-400 mr-1"></i></a>
-                            @else
-                              @if ($auction->bid->people->name === $data->people->name)
-                              Dipilih
-                              @else
-                              Tidak dipilih
-                              @endif
-                        @endif
-                        </td>
+                          @if ($auction->bid === null)
+                                @can('petugas')
+                                      <form id="{{ $data->id }}" action="{{ route('bid-list.updateAuction', ['bid' => $data->id]) }}" method="POST">
+                                          @csrf
+                                          @method('patch')
+                                        </form>
+                                        <a href="#" onclick="winnerConfirm('{{ $data->people->name }}', '{{ $data->id }}')"><i class="fas fa-crown text-green-400 mr-1"></i></a>
+                                @endcan
+                                @else
+                                @if ($auction->bid->people->name === $data->people->name)
+                                Dipilih
+                                @else
+                                Tidak dipilih
+                                @endif
+                          @endif
+                          </td>
                     </tr>
                     @endforeach            
                     <!-- More items... -->
@@ -291,6 +294,8 @@
       </div>
   </div>
 </div>
+@endif
+
 
 <x-slot name="script">
   @if (session('success'))

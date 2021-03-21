@@ -19,7 +19,6 @@ class CreateItemsTable extends Migration
             $table->date('date');
             $table->bigInteger('starting_price');
             $table->text('desc');
-            $table->string('pic')->nullable();
             $table->foreignId('operator_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

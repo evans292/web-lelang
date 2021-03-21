@@ -93,7 +93,7 @@ class AuctionController extends Controller
     public function show(Auction $auction)
     {
         //
-        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+        if (Gate::allows('masyarakat')) {
             abort(403);
         }
 
@@ -172,6 +172,6 @@ class AuctionController extends Controller
 
         $datas = Auction::where('status', 'close')->paginate(10);
 
-        return view('operator.petugas.auction.index', compact('datas')); 
+        return view('operator.both.history', compact('datas')); 
     }
 }

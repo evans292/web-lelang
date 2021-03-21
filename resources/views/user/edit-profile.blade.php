@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <x-label for="phone" :value="__('No. Handphone')" />
+                            <x-label for="phone" :value="__('No. Handphone*')" />
                             <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" value="{{ $data->phone }}" required />
                             <x-validation-message name="phone"/>
                         </div>
