@@ -1,6 +1,6 @@
 <x-operator-layout>
     <x-slot name="title">
-      {{ __('Data Lelang') }}
+      {{ __('Riwayat Lelang') }}
     </x-slot>  
   
 
