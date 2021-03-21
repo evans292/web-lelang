@@ -45,7 +45,6 @@ class BidController extends Controller
             # code...
             $bid = Bid::where('item_id', $item->id)->where('people_id', Auth::user()->people[0]->id)->first();
         }
-
         return view('masyarakat.place-bid', compact('auction', 'bid'));
     }
 

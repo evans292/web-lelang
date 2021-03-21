@@ -212,6 +212,7 @@
                   @else
                   <div class="flex justify-between items-center">
                     Anda telah menawar barang ini dengan harga @currency($bid->bid_price)
+                    @if ($auction->bid === null)
                     <div>
                       <form id="{{ $bid->id }}" action="{{ route('bid-list.destroy', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}" method="POST">
                         @csrf
@@ -220,7 +221,7 @@
                       <a href="{{ route('bid-list.edit', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
                       <a href="#" onclick="deleteConfirm('{{ $bid->people->name }}', '{{ $bid->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
                     </div>
-                   
+                    @endif                   
                   </div>
                   @endif
                 </div>
