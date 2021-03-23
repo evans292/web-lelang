@@ -62,7 +62,7 @@
                 </div>
                 <div class="text-center mt-40">
                   <h3
-                    class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
+                    class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2 capitalize"
                   >
                     {{ $data->name }} 
                     <a href="{{ route('profile.edit') }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1 text-sm"></i></a>

@@ -33,7 +33,7 @@
                             @else
                             <img src="{{ Auth::user()->getMedia('avatar')[0]->getUrl() }}" class="rounded-full w-10 h-10 mr-2">
                             @endif
-                            <div>{{ Auth::user()->name }}</div>
+                            <div class="capitalize">{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="ml-3">
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-base text-gray-800 capitalize">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
             </div>
