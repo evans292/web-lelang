@@ -134,22 +134,10 @@
     
 
     <x-slot name="script">
-        @if (session('admin'))
+        @if (session('customer'))
         <script>
             document.addEventListener('DOMContentLoaded', function() { 
-                greet('Admin')
-            }, true); 
-        </script>
-        @elseif (session('operator'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() { 
-                greet('Operator')
-            }, true); 
-        </script>
-        @elseif (session('customer'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() { 
-                greet('Customer')
+                greet("{{ Auth::user()->people[0]->name }}", 'top')
             }, true); 
         </script>
         @endif

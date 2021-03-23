@@ -127,16 +127,10 @@
   
       
     <x-slot name="script">
-      @if (session('admin'))
-          <script>
-              document.addEventListener('DOMContentLoaded', function() { 
-                  greet('Admin', 'bottom-right')
-              }, true); 
-          </script>
-       @elseif (session('operator'))
+       @if (session('operator'))
        <script>
            document.addEventListener('DOMContentLoaded', function() { 
-               greet('Operator', 'bottom-right')
+               greet("{{ Auth::user()->operators[0]->name }}", 'bottom-right')
            }, true); 
        </script>
        @endif
