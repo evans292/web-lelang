@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::resource('bid-list', BidController::class)->except([
-        'create', 'update'
+        'create', 'update', 'edit', 'destroy'
     ]);
 
     Route::get('/bid-list/{auction}/{item}/create', [BidController::class, 'create'])->name('bid-list.create');
