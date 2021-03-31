@@ -15,31 +15,31 @@
                     <div class="w-full ml-5">
                         <div class="mb-4">
                             <x-label for="name" :value="__('Nama')" />
-                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $people->name }}" required readonly/>
+                            <x-input id="name" class="block mt-1 w-full bg-gray-50" type="text" name="name" value="{{ $people->name }}" required readonly/>
                         </div>
             
                         <div class="mb-4">
                             <x-label for="birthdate" :value="__('Tanggal Lahir')" />
-                            <x-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" value="{{ $people->birthdate }}" required readonly/>
+                            <x-input id="birthdate" class="block mt-1 w-full bg-gray-50" type="date" name="birthdate" value="{{ $people->birthdate }}" required readonly/>
                         </div>
                         
                         <div class="mb-4">
                             <x-label for="name" :value="__('Jenis Kelamin')" />
                             @if ($people->gender === null)
-                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="" required readonly/>
+                            <x-input id="name" class="block mt-1 w-full bg-gray-50" type="text" name="name" value="" required readonly/>
                             @else
-                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $people->gender == 'L' ? 'Laki - Laki' : 'Perempuan'}}" required readonly/>
+                            <x-input id="name" class="block mt-1 w-full bg-gray-50" type="text" name="name" value="{{ $people->gender == 'L' ? 'Laki - Laki' : 'Perempuan'}}" required readonly/>
                             @endif
                         </div>
 
                         <div class="mb-4">
                             <x-label for="address" value="{{ __('Alamat') }}" />
-                            <textarea name="address" id="address" cols="30" rows="10" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" readonly>{{ $people->address }}</textarea>
+                            <textarea name="address" id="address" cols="30" rows="10" class="bg-gray-50 block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" readonly>{{ $people->address }}</textarea>
                         </div>
 
                         <div class="mb-4">
                             <x-label for="phone" :value="__('No. Handphone')" />
-                            <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" value="{{ $people->phone }}" required />
+                            <x-input id="phone" class="block mt-1 w-full bg-gray-50" type="number" name="phone" value="{{ $people->phone }}" required readonly/>
                         </div>
 
                     </div>
