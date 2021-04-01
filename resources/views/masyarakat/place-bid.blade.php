@@ -221,7 +221,12 @@
                       <a href="{{ route('bid-list.edit', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
                       <a href="#" onclick="deleteConfirm('{{ $bid->people->name }}', '{{ $bid->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
                     </div>
-                    @endif                   
+                    @endif  
+                    @if ($auction->bid->people->name === Auth::user()->people[0]->name)
+                  <a class="bg-green-300 opacity-75 hover:opacity-100 text-green-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="#"><i class="fas fa-shopping-cart -ml-2 mr-2"></i>CHECKOUT</a>
+                    @else 
+                    <i class="fas fa-frown text-red-400 mr-1"></i>
+                    @endif
                   </div>
                   @endif
                 </div>

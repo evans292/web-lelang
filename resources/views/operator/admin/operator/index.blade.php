@@ -81,9 +81,13 @@
                                     @csrf
                                     @method('delete')
                                   </form>
+                                  @if ($data->user->role_id !== 1)
                                   <a href="#" onclick="deleteConfirm('{{ $data->name }}', '{{ $data->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
+                                  @endif
+                                  @if ($data->user->role_id !== 1)
                                   <a href="{{ route('operator.operator-list.edit', ['operator_list' => $data->user_id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
-                                <a href="{{ route('operator.operator-list.show', ['operator_list' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
+                                  @endif
+                                  <a href="{{ route('operator.operator-list.show', ['operator_list' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
                                 </td>
                         </tr>
                         @endforeach            

@@ -14,8 +14,7 @@ class MasyarakatController extends Controller
     public function dashboard()
     {
         $auc = Auction::where('status', 'open')->latest()->first();
-        $auction = Auction::where('status', 'open')->orderBy('created_at', 'desc')->paginate(10);
-
+        $auction = Auction::where('status', 'open')->orderBy('created_at', 'asc')->paginate(10);
         return view('dashboard', compact('auc', 'auction'));
     }
 

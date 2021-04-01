@@ -96,7 +96,6 @@ class AuctionController extends Controller
         if (Gate::allows('masyarakat')) {
             abort(403);
         }
-
         return view('operator.petugas.auction.show', compact('auction'));
     }
 
