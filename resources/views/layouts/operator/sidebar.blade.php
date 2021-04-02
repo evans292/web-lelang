@@ -172,7 +172,13 @@
                  {{ __('Daftar Penawaran') }}
                </x-side-link>
              </li>
-             </li>
+
+             <li class="items-center">
+              <x-side-link :href="route('checkout.list')" :active="request()->routeIs('checkout.list')">
+                <i class="fas fa-truck mr-2 text-sm " ></i>
+                {{ __('Data Checkout') }}
+              </x-side-link>
+            </li>
            </ul>
           @endcan
 

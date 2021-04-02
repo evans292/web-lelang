@@ -223,9 +223,13 @@
                     </div>
                     @endif  
                     @if ($auction->bid->people->name === Auth::user()->people[0]->name)
-                  <a class="bg-green-300 opacity-75 hover:opacity-100 text-green-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="#"><i class="fas fa-shopping-cart -ml-2 mr-2"></i>CHECKOUT</a>
+                      @if ($auction->item->checkouts === null)
+                        <a class="bg-green-300 opacity-75 hover:opacity-100 text-green-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="{{ route('checkout.index', ['auction' => $auction->id, 'item' => $auction->item->id]) }}"><i class="fas fa-shopping-cart -ml-2 mr-2"></i>CHECKOUT</a>
+                      @else
+                        <a class="bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="{{ route('checkout.show', ['auction' => $auction->id, 'item' => $auction->item->id]) }}"><i class="fas fa-eye -ml-2 mr-2"></i>DETAIL</a>
+                      @endif
                     @else 
-                    <i class="fas fa-frown text-red-400 mr-1"></i>
+                    <a class="bg-red-300 opacity-100 text-red-900 rounded-full px-10 py-2 font-semibold"><i class="fas fa-frown -ml-2 mr-2"></i>ANDA KALAH</a>
                     @endif
                   </div>
                   @endif
@@ -346,6 +350,12 @@
               success('Keluar lelang berhasil')
             }, true); 
         </script>
+        @elseif (session('cek'))
+        <script>
+              document.addEventListener('DOMContentLoaded', function() { 
+                success('Checkout barang berhasil')
+              }, true); 
+          </script>
       @endif
   </x-slot>
 </x-app-layout>

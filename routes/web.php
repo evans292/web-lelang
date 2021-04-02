@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\Operator\{ItemController, UserController, ReportController, AuctionController, OperatorController};
+use App\Http\Controllers\Operator\{ItemController, UserController, ReportController, AuctionController, CheckoutController, OperatorController};
 use App\Http\Controllers\Masyarakat\BidController;
 use App\Http\Controllers\Petugas\PetugasController;
 use App\Http\Controllers\Masyarakat\MasyarakatController;
@@ -80,6 +80,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('bid-list', BidController::class)->except([
         'create', 'update', 'edit', 'destroy'
     ]);
+
+    Route::get('/bid-list/{auction}/{item}/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('/bid-list/{auction}/{item}/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
+    Route::get('/bid-list/{auction}/{item}/checkout/create', [CheckoutController::class, 'create'])->name('checkout.create');
+    Route::get('/bid-list/checkout-list', [CheckoutController::class, 'list'])->name('checkout.list');
+    Route::post('/bid-list/{auction}/{item}/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::get('/bid-list/{auction}/{item}/create', [BidController::class, 'create'])->name('bid-list.create');
     Route::get('/bid-list/{auction}/{item}/{bid}/edit', [BidController::class, 'edit'])->name('bid-list.edit');

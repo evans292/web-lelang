@@ -6889,7 +6889,7 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
 filepond__WEBPACK_IMPORTED_MODULE_6__.registerPlugin((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_7___default()), (filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_14___default()), (filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_8___default()), (filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_9___default()), (filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_10___default()), (filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_11___default()), (filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_12___default()), (filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_13___default()));
 var pond = filepond__WEBPACK_IMPORTED_MODULE_6__.create(document.querySelector('input[id="pic"]'), {
-  labelIdle: "Seret foto profilmu atau <span class=\"filepond--label-action\">Telusuri</span>",
+  labelIdle: "Seret foto atau <span class=\"filepond--label-action\">Telusuri</span>",
   imagePreviewHeight: 170,
   imageCropAspectRatio: '1:1',
   imageResizeTargetWidth: 200,

@@ -42,7 +42,7 @@ FilePond.registerPlugin(
 
 const pond = FilePond.create(document.querySelector('input[id="pic"]'), 
 {
-    labelIdle: `Seret foto profilmu atau <span class="filepond--label-action">Telusuri</span>`,
+    labelIdle: `Seret foto atau <span class="filepond--label-action">Telusuri</span>`,
     imagePreviewHeight: 170,
     imageCropAspectRatio: '1:1',
     imageResizeTargetWidth: 200,
