@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Gate;
 class CheckoutController extends Controller
 {
     //
+    public function list()
+    {
+        if (Gate::allows('masyarakat') || Gate::allows('admin')) {
+            abort(403);
+        }
+
+        $datas = Checkout::paginate(10);
+        return view('operator.petugas.checkout.index', compact('datas'));
+    }
+
     public function index(Auction $auction, Item $item)
     {
         if (Gate::allows('petugas') || Gate::allows('admin')) {
@@ -58,4 +68,5 @@ class CheckoutController extends Controller
 
         return redirect()->route('bid-list.create', ['auction' => $request->auc_id, 'item' => $request->item_id])->with('cek', 'lol');
     }
+
 }
