@@ -17,9 +17,13 @@ class CreateCheckoutsTable extends Migration
             $table->id();
             $table->foreignId('item_id')->constrained()->onDelete('cascade');
             $table->foreignId('people_id')->constrained()->onDelete('cascade');
+            $table->foreignId('operator_id')->nullable()->constrained()->onDelete('cascade');
             $table->text('address');
+            $table->enum('courier', ['JNE', 'TIKI', 'J&T', 'siCepat', 'idExpress']);
             $table->string('receipt')->nullable();
             $table->enum('status', ['menunggu', 'dikirim', 'selesai'])->default('menunggu');
+            $table->timestamp('receipt_at')->nullable();
+            $table->timestamp('done_at')->nullable();
             $table->timestamps();
         });
     }

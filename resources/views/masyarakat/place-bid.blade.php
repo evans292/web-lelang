@@ -221,7 +221,7 @@
                       <a href="{{ route('bid-list.edit', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
                       <a href="#" onclick="deleteConfirm('{{ $bid->people->name }}', '{{ $bid->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
                     </div>
-                    @endif  
+                    @else 
                     @if ($auction->bid->people->name === Auth::user()->people[0]->name)
                       @if ($auction->item->checkouts === null)
                         <a class="bg-green-300 opacity-75 hover:opacity-100 text-green-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" href="{{ route('checkout.index', ['auction' => $auction->id, 'item' => $auction->item->id]) }}"><i class="fas fa-shopping-cart -ml-2 mr-2"></i>CHECKOUT</a>
@@ -230,6 +230,7 @@
                       @endif
                     @else 
                     <a class="bg-red-300 opacity-100 text-red-900 rounded-full px-10 py-2 font-semibold"><i class="fas fa-frown -ml-2 mr-2"></i>ANDA KALAH</a>
+                    @endif
                     @endif
                   </div>
                   @endif

@@ -11,32 +11,32 @@
                         @csrf
                          <!-- Name -->
                         <div>
-                            <x-label for="name" :value="__('Nama*')" />
+                            <x-label for="name" :value="__('Nama')" />
                             <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" placeholder="Nama barang" autofocus />
                             <x-validation-message name="name"/>
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="date" :value="__('Tanggal*')" />
+                            <x-label for="date" :value="__('Tanggal')" />
                             <x-input id="date" class="block mt-1 w-full" type="date" name="date" :value="old('date')" />
                             <x-validation-message name="date"/>
                         </div>
 
 
                         <div class="mt-4">
-                            <x-label for="price" :value="__('Harga Awal*')" />
+                            <x-label for="price" :value="__('Harga Awal')" />
                             <x-input id="price" class="block mt-1 w-full" type="number" name="price" placeholder="Harga awal barang (contoh: 25000)" :value="old('price')"  />
                             <x-validation-message name="price"/>
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="desc" value="{{ __('Deskripsi Barang*') }}" />
+                            <x-label for="desc" value="{{ __('Deskripsi Barang') }}" />
                             <textarea name="desc" id="desc" cols="30" rows="10" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('desc') }}</textarea>
                             <x-validation-message name="desc"/>
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="pic" :value="__('Foto Barang* (png/jpeg/jpg/gif) maksimal : 3 foto')" />
+                            <x-label for="pic" :value="__('Foto Barang (png/jpeg/jpg/gif) maksimal : 3 foto')" />
                             <input type="file" name="pics[]" id="pics" required accept="image/png, image/jpeg, image/gif, image/jpg" 
                             multiple 
                             data-allow-reorder="true"

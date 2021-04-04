@@ -84,6 +84,22 @@ window.deleteConfirm = function(title, formId)
     });
 }
 
+window.doneConfirm = function(formId)
+{
+    Swal.fire({
+        icon: 'question',
+        text: `Selesaikan transaksi ?`,
+        showCancelButton: true,
+        confirmButtonText: 'Pilih',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#34d399',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(formId).submit();
+        }
+    });
+}
+
 // ============= VUE =====================================
 
 Vue.use(VueToast);

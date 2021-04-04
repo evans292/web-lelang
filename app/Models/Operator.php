@@ -27,4 +27,9 @@ class Operator extends Model
     {
         return $this->hasMany(Auction::class);
     }
+
+    public function checkouts()
+    {
+        return $this->hasMany(Checkout::class);
+    }
 }

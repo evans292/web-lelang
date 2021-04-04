@@ -24,13 +24,13 @@
                         @csrf
                         @method('patch')
                         <div class="mb-4">
-                            <x-label for="name" :value="__('Nama*')" />
+                            <x-label for="name" :value="__('Nama')" />
                             <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $data->name }}" required />
                             <x-validation-message name="name"/>
                         </div>
             
                         <div class="mb-4">
-                            <x-label for="birthdate" :value="__('Tanggal Lahir*')" />
+                            <x-label for="birthdate" :value="__('Tanggal Lahir')" />
                             <x-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" value="{{ ($data->birthdate !== null) ? $data->birthdate->format('Y-m-d') : ''}}" required />
                             <x-validation-message name="birthdate"/>
                         </div>
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <x-label for="phone" :value="__('No. Handphone*')" />
+                            <x-label for="phone" :value="__('No. Handphone')" />
                             <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" value="{{ $data->phone }}" required />
                             <x-validation-message name="phone"/>
                         </div>

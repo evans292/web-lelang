@@ -26,7 +26,7 @@
                                 Pemenang
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Resi
+                                Kurir
                              </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Status
@@ -65,11 +65,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                @if ($data->receipt !== null)
-                                {{ Str::limit($data->receipt, 10) }}
-                                @else
-                                belum ada
-                                @endif
+                                {{ $data->courier }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                             @if ($data->status == 'menunggu')
@@ -87,8 +83,8 @@
                             @endif
                             </td>  
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                  <a href="{{ route('operator.auction.edit', ['auction' => $data->id]) }}"><i class="fas fa-pencil-alt text-yellow-400"></i></a>
-                                  <a href="{{ route('operator.auction.show', ['auction' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
+                                  <a href="{{ route('checkout.edit', ['checkout' => $data->id]) }}"><i class="fas fa-pencil-alt text-yellow-400"></i></a>
+                                  <a href="{{ route('checkout.showList', ['checkout' => $data->id]) }}"><i class="fas fa-eye text-blue-400"></i></a>
                               </td>
                         </tr>
                         @endforeach            
@@ -101,7 +97,7 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                                 <div class="p-6 bg-white border-b border-gray-200 text-gray-400">
-                                    Pelelangan kosong! 
+                                    Checkout kosong! 
                                 </div>
                             </div>
                         </div>

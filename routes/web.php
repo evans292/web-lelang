@@ -81,11 +81,17 @@ Route::group(['middleware' => 'auth'], function() {
         'create', 'update', 'edit', 'destroy'
     ]);
 
-    Route::get('/checkout-list', [CheckoutController::class, 'list'])->name('checkout.list');
     Route::get('/bid-list/{auction}/{item}/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::get('/bid-list/{auction}/{item}/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
+    Route::get('/bid-list/{auction}/{item}', [CheckoutController::class, 'show'])->name('checkout.show');
+    Route::patch('/bid-list/{auction}/{item}', [CheckoutController::class, 'done'])->name('checkout.done');
     Route::get('/bid-list/{auction}/{item}/checkout/create', [CheckoutController::class, 'create'])->name('checkout.create');
     Route::post('/bid-list/{auction}/{item}/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+    Route::get('/checkout-list', [CheckoutController::class, 'list'])->name('checkout.list');
+    Route::get('/checkout-list/{checkout}/edit', [CheckoutController::class, 'edit'])->name('checkout.edit');
+    Route::patch('/checkout-list/{checkout}', [CheckoutController::class, 'update'])->name('checkout.update');
+    Route::get('/checkout-list/{checkout}', [CheckoutController::class, 'showList'])->name('checkout.showList');
+
 
     Route::get('/bid-list/{auction}/{item}/create', [BidController::class, 'create'])->name('bid-list.create');
     Route::get('/bid-list/{auction}/{item}/{bid}/edit', [BidController::class, 'edit'])->name('bid-list.edit');

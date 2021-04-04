@@ -6922,6 +6922,21 @@ window.deleteConfirm = function (title, formId) {
       document.getElementById(formId).submit();
     }
   });
+};
+
+window.doneConfirm = function (formId) {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+    icon: 'question',
+    text: "Selesaikan transaksi ?",
+    showCancelButton: true,
+    confirmButtonText: 'Pilih',
+    cancelButtonText: 'Batal',
+    confirmButtonColor: '#34d399'
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      document.getElementById(formId).submit();
+    }
+  });
 }; // ============= VUE =====================================
 
 

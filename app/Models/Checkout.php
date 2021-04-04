@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Checkout extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
-    protected $fillable = ['item_id', 'people_id', 'address', 'receipt', 'status'];
+    protected $dates = ['receipt_at', 'done_at'];
+    protected $fillable = ['item_id', 'people_id', 'operator_id', 'address', 'receipt', 'status', 'courier', 'receipt_at', 'done_at'];
 
     public function registerMediaCollections(): void
     {
@@ -27,5 +28,10 @@ class Checkout extends Model implements HasMedia
     public function people()
     {
         return $this->belongsTo(People::class);
+    }
+
+    public function operator()
+    {
+        return $this->belongsTo(Operator::class);
     }
 }
