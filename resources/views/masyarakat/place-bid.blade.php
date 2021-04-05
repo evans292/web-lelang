@@ -219,7 +219,7 @@
                         @method('delete')
                       </form>
                       <a href="{{ route('bid-list.edit', ['auction' => $auction->id, 'item' => $auction->item->id, 'bid' => $bid->id]) }}"><i class="fas fa-pencil-alt text-yellow-400 mr-1"></i></a>
-                      <a href="#" onclick="deleteConfirm('{{ $bid->people->name }}', '{{ $bid->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
+                      <a href="#" onclick="outConfirm('{{ $bid->people->name }}', '{{ $bid->id }}')"><i class="fas fa-trash-alt text-red-400 mr-1"></i></a>
                     </div>
                     @else 
                     @if ($auction->bid->people->name === Auth::user()->people[0]->name)
@@ -237,8 +237,20 @@
                 </div>
             </div>
         </div>
-    </div>
-    @endif
+      </div>
+      @else
+    @if ($auction->item->bids->count() == 0)
+      <div class="py-6">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    Belum ada penawar
+                </div>
+            </div>
+        </div>
+      </div>
+      @endif
+      @endif
 
     @if ($auction->item->bids->count() > 0)
     <div class="px-4">

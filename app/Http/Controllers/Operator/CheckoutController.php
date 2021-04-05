@@ -63,7 +63,7 @@ class CheckoutController extends Controller
             'item_id' => $request->item_id,
             'people_id' => Auth::user()->people[0]->id,
             'address' => $request->address,
-            'kurir' => $request->kurir
+            'courier' => $request->kurir
         ]);
 
         $temporaryfile = TemporaryFile::where('folder', $request->pic)->first();

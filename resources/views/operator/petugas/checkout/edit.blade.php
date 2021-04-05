@@ -17,7 +17,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="resi" :value="__('Resi*')" />
+                            <x-label for="resi" :value="__('Resi')" />
                             <x-input id="resi" class="block mt-1 w-full" type="number" name="resi" value="{{ $checkout->receipt }}" placeholder="No Resi" autofocus />
                             <x-validation-message name="resi"/>
                         </div>

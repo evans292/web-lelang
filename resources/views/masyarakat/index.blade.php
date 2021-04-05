@@ -67,7 +67,7 @@
                     @can('masyarakat')
                     @if ($data->item->auction->status === 'open')
                     <a class="text-center bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->item->auction->id, 'item' => $data->item->id]) }}">
-                        <i class="fas fa-gavel -ml-2 mr-2"></i> TAWAR SEKARANG
+                        <i class="fas fa-eye -ml-2 mr-2"></i> LIHAT TAWARAN
                     </a>
                     @else
                     <a class="text-center bg-blue-300 opacity-75 hover:opacity-100 text-blue-900 hover:text-gray-900 font-semibold px-4 pt-10 pb-10 border-t border-gray-300 bg-gray-100 block" href="{{ route('bid-list.create', ['auction' => $data->item->auction->id, 'item' => $data->item->id]) }}">

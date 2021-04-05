@@ -11,12 +11,12 @@
                       @csrf
                       <div class="flex justify-around">
                         <div class="mb-4 w-full mr-4">
-                            <x-label for="tgl1" :value="__('Dari Tanggal*')" />
+                            <x-label for="tgl1" :value="__('Dari Tanggal')" />
                             <x-input id="tgl1" class="block mt-1 w-full" type="date" name="tgl1" value="" required />
                             <x-validation-message name="tgl1"/>
                         </div>
                         <div class="mb-4 w-full">
-                            <x-label for="tgl2" :value="__('Sampai Tanggal*')" />
+                            <x-label for="tgl2" :value="__('Sampai Tanggal')" />
                             <x-input id="tgl2" class="block mt-1 w-full" type="date" name="tgl2" value="" required />
                             <x-validation-message name="tgl2"/>
                         </div>

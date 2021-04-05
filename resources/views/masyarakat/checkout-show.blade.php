@@ -125,6 +125,13 @@
     </div>
 
     <x-slot name="script">
+      @if (session('success'))
+      <script>
+          document.addEventListener('DOMContentLoaded', function() { 
+              success('Transaksi selesai!')
+          }, true); 
+      </script>
+      @endif
       <script>
 
           let modal = function(imgId) {

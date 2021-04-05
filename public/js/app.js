@@ -6924,6 +6924,21 @@ window.deleteConfirm = function (title, formId) {
   });
 };
 
+window.outConfirm = function (title, formId) {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+    icon: 'question',
+    text: "Keluar dari lelang ini (".concat(title, ") ?"),
+    showCancelButton: true,
+    confirmButtonText: 'Keluar',
+    cancelButtonText: 'Batal',
+    confirmButtonColor: '#e3342f'
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      document.getElementById(formId).submit();
+    }
+  });
+};
+
 window.doneConfirm = function (formId) {
   sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
     icon: 'question',
