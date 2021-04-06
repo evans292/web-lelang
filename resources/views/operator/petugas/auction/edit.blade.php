@@ -11,7 +11,7 @@
                         @csrf
                         @method('patch')
                          <div class="mt-4">
-                            <x-label for="item_id" value="{{ __('Barang*') }}" />
+                            <x-label for="item_id" value="{{ __('Barang') }}" />
                             <select name="item_id" id="item_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm select2">
                                 <option value="" class="text-gray-400" selected>-- pilih barang --</option>
                                 @foreach ($datas as $item)
@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="date" :value="__('Tanggal*')" />
+                            <x-label for="date" :value="__('Tanggal')" />
                             <x-input id="date" class="block mt-1 w-full" type="date" name="date" value="{{ $auction->auction_date->format('Y-m-d') }}" />
                             <x-validation-message name="date"/>
                         </div>
