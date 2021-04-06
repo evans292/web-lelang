@@ -32,4 +32,9 @@ class Operator extends Model
     {
         return $this->hasMany(Checkout::class);
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

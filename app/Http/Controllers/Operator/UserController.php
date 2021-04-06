@@ -96,7 +96,6 @@ class UserController extends Controller
         }
 
         $operator = Operator::findOrFail($id);
-
         return view('operator.admin.operator.show', compact('operator'));
     }
 
